@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="Perfexxxion Pro Shop">
+  <defs><radialGradient id="g" cx="35%" cy="30%" r="75%"><stop offset="0" stop-color="#ff4d5e"/><stop offset=".55" stop-color="#c8102e"/><stop offset="1" stop-color="#5c0614"/></radialGradient></defs>
+  <circle cx="100" cy="100" r="92" fill="url(#g)"/>
+  <circle cx="82" cy="62" r="11" fill="#1a0408"/><circle cx="114" cy="58" r="11" fill="#1a0408"/><circle cx="104" cy="104" r="14" fill="#1a0408"/>
+  <path d="M30 140c40 20 100 22 140-8" fill="none" stroke="#fff" stroke-opacity=".25" stroke-width="6" stroke-linecap="round"/>
+</svg>
