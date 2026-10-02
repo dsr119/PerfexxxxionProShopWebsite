@@ -8,7 +8,6 @@
   <meta property="og:title" content="Perfexxxion Pro Shop - Bowling Balls">
   <meta property="og:description" content="Shop bowling balls by performance, cover, core, oil condition, or brand, and order through Perfexxxion Pro Shop.">
   <link rel="icon" href="../images/logo.svg">
-  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../assets/style.css">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -942,14 +941,12 @@
     </div>
   </div>
   <script>
-    const SHEET_ID   = '1clQgsdkcheQzA4msoQUFNNKuv1shCymDGX9z-u8jR2I';
-    const JSON_URL   = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=Bowling%20Balls`;
-    const NEW_URL    = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=Recent%20Releases`;
-    const STAFF_URL  = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=staffMembersBag`;
-    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyM-XG8M1nZLCSTmWesyFU0g6oUvq65FKzLSkHQSFjAFmfnGwLg_luEFaubiP3WuAlWHA/exec';
+    // The catalog, new releases and staff picks all come from Supabase now.
+    // The daily ball scraper (ProShopAppV1C, scraper/) keeps the balls table
+    // current, the job the Google Sheet's Apps Script used to do.
 
 
-    // Orders now go straight into Supabase, which is what the pro shop app
+    // Orders go straight into Supabase too, which is what the pro shop app
     // reads. The publishable key is meant to sit in client-side code -- it can
     // do only what the RLS policies allow the anon role to do.
     const SUPABASE_URL = 'https://ngghyuvykqqklztvvmld.supabase.co';
@@ -969,55 +966,52 @@
     let activeStaff    = 0;
 
 
-    // ── Parse gviz response ──────────────────────────────
-    function parseGviz(text) {
-      const json = JSON.parse(text.match(/google\.visualization\.Query\.setResponse\(([\s\S]*)\)/)[1]);
-      return json.table;
+    // ── Supabase reads ───────────────────────────────────
+    function supabaseGet(path) {
+      return fetch(SUPABASE_URL + '/rest/v1/' + path, {
+        headers: { apikey: SUPABASE_KEY, Authorization: 'Bearer ' + SUPABASE_KEY }
+      }).then(r => {
+        if (!r.ok) throw new Error('HTTP ' + r.status);
+        return r.json();
+      });
     }
 
 
-    function colIndex(cols, ...names) {
-      for (const n of names) {
-        const i = cols.findIndex(c => c.label && c.label.toLowerCase().replace(/\s+/g,'').includes(n));
-        if (i !== -1) return i;
-      }
-      return -1;
+    // The page was written against the sheet's display text ("$164.95",
+    // "July 2012"), so rows are shaped back into that.
+    function formatPrice(value) {
+      return value == null ? '' : '$' + Number(value).toFixed(2);
     }
 
 
-    function cellVal(row, i) {
-      if (i < 0 || !row.c[i]) return '';
-      const cell = row.c[i];
-      return String(cell.f ?? cell.v ?? '').trim();
+    function formatRelease(value) {
+      const match = String(value || '').match(/^(\d{4})-(\d{2})/);
+      if (!match) return '';
+      return new Date(Date.UTC(+match[1], +match[2] - 1, 1))
+        .toLocaleString('en-US', { month: 'long', year: 'numeric', timeZone: 'UTC' });
+    }
+
+
+    function toProduct(row) {
+      return {
+        img:       (row.image_url || '').replace(/https?:\/\/+/, 'https://'),
+        brand:     row.brand || '',
+        name:      row.name || '',
+        price:     formatPrice(row.price),
+        release:   formatRelease(row.release_month),
+        coverType: row.cover_type || '',
+        coreType:  row.core_type || '',
+        finish:    row.cover_finish || '',
+        oil:       row.oil_condition || '',
+        discontinued: row.discontinued || 'Unknown',
+      };
     }
 
 
     // ── Load NEW RELEASES ────────────────────────────────
-    fetch(NEW_URL)
-      .then(r => r.text())
-      .then(text => {
-        const table = parseGviz(text);
-        const cols  = table.cols;
-        const rows  = table.rows;
-
-
-        const iImg   = colIndex(cols, 'imageurl', 'image');
-        const iBrand = colIndex(cols, 'brand');
-        const iName  = colIndex(cols, 'ballname', 'name');
-        const iPrice = colIndex(cols, 'price');
-        const iDiscontinued = colIndex(cols, 'discontinued');
-
-
-        const items = rows
-          .filter(r => r.c && r.c.some(cell => cell && cell.v))
-          .map(r => ({
-            img:   iImg   >= 0 ? cellVal(r, iImg).replace(/https?:\/\/+/, 'https://') : '',
-            brand: cellVal(r, iBrand),
-            name:  cellVal(r, iName),
-            price: cellVal(r, iPrice),
-            discontinued: cellVal(r, iDiscontinued) || 'Unknown',
-          }))
-          .filter(p => p.name || p.img);
+    supabaseGet('balls?is_recent_release=is.true&order=release_month.desc.nullslast,name.asc')
+      .then(rows => {
+        const items = rows.map(toProduct);
 
 
         const track = document.getElementById('newReleasesTrack');
@@ -1050,40 +1044,10 @@
 
 
     // ── Load STAFF PICKS ────────────────────────────────
-    fetch(STAFF_URL)
-      .then(r => r.text())
-      .then(text => {
-        const table = parseGviz(text);
-        let headerRowIndex = -1;
-        let columnLabels = table.cols.map(col => normalizeKey(col.label));
-
-
-        if (!columnLabels.includes('staffmember')) {
-          headerRowIndex = table.rows.findIndex(row => row.c && row.c.some((cell, index) =>
-            normalizeKey(cellVal(row, index)) === 'staffmember'
-          ));
-          if (headerRowIndex >= 0) {
-            columnLabels = table.cols.map((col, index) => normalizeKey(cellVal(table.rows[headerRowIndex], index)));
-          }
-        }
-
-
-        const staffColumn = columnLabels.indexOf('staffmember');
-        const ballColumns = columnLabels
-          .map((label, index) => ({ index, label }))
-          .filter(col => /^ball[1-9]$/.test(col.label))
-          .map(col => col.index);
-
-
-        if (staffColumn < 0 || !ballColumns.length) throw new Error('Staff sheet headers were not found.');
-
-
-        staffBags = table.rows.slice(headerRowIndex + 1)
-          .filter(row => row.c && cellVal(row, staffColumn))
-          .map(row => ({
-            member: cellVal(row, staffColumn),
-            selections: ballColumns.map(index => cellVal(row, index)).filter(Boolean),
-          }))
+    supabaseGet('staff_bags?order=sort_order.asc,staff_member.asc')
+      .then(rows => {
+        staffBags = rows
+          .map(row => ({ member: row.staff_member, selections: (row.balls || []).filter(Boolean) }))
           .filter(bag => bag.member && bag.selections.length);
 
 
@@ -1096,41 +1060,9 @@
 
 
     // ── Load MAIN CATALOG ────────────────────────────────
-    fetch(JSON_URL)
-      .then(r => r.text())
-      .then(text => {
-        const table = parseGviz(text);
-        const cols  = table.cols;
-        const rows  = table.rows;
-
-
-        const iImg       = colIndex(cols, 'imageurl', 'image');
-        const iBrand     = colIndex(cols, 'brand');
-        const iName      = colIndex(cols, 'ballname', 'name');
-        const iPrice     = colIndex(cols, 'price');
-        const iRelease   = colIndex(cols, 'releasedate');
-        const iCoverType = colIndex(cols, 'covertype');
-        const iCoreType  = colIndex(cols, 'coretype');
-        const iFinish    = colIndex(cols, 'coverfinish');
-        const iOil       = colIndex(cols, 'oilcondition');
-        const iDiscontinued = colIndex(cols, 'discontinued');
-
-
-        allProducts = rows
-          .filter(r => r.c && r.c.some(cell => cell && cell.v))
-          .map(r => ({
-            img:       cellVal(r, iImg).replace(/https?:\/\/+/, 'https://'),
-            brand:     cellVal(r, iBrand),
-            name:      cellVal(r, iName),
-            price:     cellVal(r, iPrice),
-            release:   cellVal(r, iRelease),
-            coverType: cellVal(r, iCoverType),
-            coreType:  cellVal(r, iCoreType),
-            finish:    cellVal(r, iFinish),
-            oil:       cellVal(r, iOil),
-            discontinued: cellVal(r, iDiscontinued) || 'Unknown',
-          }))
-          .filter(p => p.name || p.img);
+    supabaseGet('balls?order=brand.asc,name.asc')
+      .then(rows => {
+        allProducts = rows.map(toProduct).filter(p => p.name || p.img);
 
 
         buildFilters();
@@ -1569,24 +1501,6 @@
         // response resolved even when the order never arrived -- customers
         // saw "Order Received!" for orders that were silently dropped.
         if (!res.ok) throw new Error((await res.text()) || res.status);
-
-
-        // Best-effort mirror into the old Google Sheet while the shop runs
-        // both systems. Deliberately not awaited: the order is already safe
-        // in Supabase, and this endpoint cannot report success anyway.
-        fetch(SCRIPT_URL, {
-          method: 'POST',
-          mode: 'no-cors',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            name, phone,
-            orderLocation: orderLoc,
-            pickupLocation: pickLoc,
-            ball, weight,
-            fitting: fittingSpecs,
-            source: 'From Website'
-          })
-        }).catch(() => {});
 
 
         document.getElementById('modalBody').innerHTML = `
