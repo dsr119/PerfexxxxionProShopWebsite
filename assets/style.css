@@ -124,3 +124,41 @@ main { min-height: 60vh; }
 
 .site-footer { background: var(--header-bg); color: #d1d5db; padding: 16px 0; font-size: .95rem; }
 .site-footer a { color: #fff; }
+
+/* Footer legal links */
+.legal-links { display: flex; flex-wrap: wrap; gap: 4px 16px; margin: 8px 0 0; font-size: .88rem; }
+.legal-links a, .legal-links button { color: #d1d5db; }
+.legal-links button { background: none; border: 0; padding: 0; font: inherit; text-decoration: underline; cursor: pointer; }
+.legal-links a:hover, .legal-links button:hover { color: #fff; }
+
+/* Cookie banner (assets/consent.js) */
+.consent-banner { position: fixed; left: 0; right: 0; bottom: 0; z-index: 1000; background: #fff; color: #1f2933; border-top: 4px solid var(--accent); box-shadow: 0 -6px 24px rgba(0,0,0,.25); font-family: "Raleway", "Helvetica Neue", Arial, sans-serif; font-size: .95rem; line-height: 1.5; }
+.consent-inner { max-width: var(--max); margin: 0 auto; padding: 16px; display: flex; flex-wrap: wrap; align-items: center; gap: 12px 24px; }
+.consent-text { flex: 1 1 420px; margin: 0; }
+.consent-text a { color: var(--accent-dark); }
+.consent-options { flex: 1 1 100%; margin: 0; padding: 8px 12px; border: 1px solid #d1d5db; border-radius: 6px; display: flex; flex-wrap: wrap; gap: 6px 24px; }
+.consent-options[hidden] { display: none; }
+.consent-options legend { padding: 0 4px; font-weight: 700; }
+.consent-options label { display: flex; align-items: center; gap: 8px; }
+.consent-buttons { display: flex; flex-wrap: wrap; gap: 8px; }
+.consent-buttons button { font: inherit; font-weight: 600; padding: 9px 16px; border-radius: 4px; border: 2px solid var(--accent); background: #fff; color: var(--accent-dark); cursor: pointer; }
+.consent-buttons button[hidden] { display: none; }
+.consent-buttons .consent-primary { background: var(--accent); color: #fff; }
+.consent-buttons button:hover { background: var(--accent-dark); border-color: var(--accent-dark); color: #fff; }
+.consent-banner :focus-visible, .legal-links :focus-visible { outline: 3px solid #f5b700; outline-offset: 2px; }
+
+/* Policy pages */
+.legal h2 { font-size: 1.3rem; margin: 32px 0 8px; }
+.legal .updated { color: var(--muted); }
+.legal ul { padding-left: 1.4em; }
+.legal table { border-collapse: collapse; width: 100%; margin: 12px 0; font-size: .95rem; }
+.legal th, .legal td { text-align: left; vertical-align: top; border: 1px solid #d1d5db; padding: 8px 10px; }
+.legal th { background: var(--surface); }
+.legal .table-scroll { overflow-x: auto; }
+.request-form { display: grid; gap: 14px; max-width: 560px; margin: 16px 0; }
+.request-form label { font-weight: 600; display: grid; gap: 4px; }
+.request-form input, .request-form select, .request-form textarea { font: inherit; padding: 9px 11px; border: 1px solid #9aa5b1; border-radius: 4px; }
+.request-form .check { display: flex; gap: 8px; align-items: flex-start; font-weight: 400; }
+.request-form .check input { margin-top: .35em; }
+.request-form button { justify-self: start; font: inherit; font-weight: 600; padding: 10px 20px; border: 0; border-radius: 4px; background: var(--accent); color: #fff; cursor: pointer; }
+.request-form button:hover { background: var(--accent-dark); }

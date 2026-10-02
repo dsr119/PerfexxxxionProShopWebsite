@@ -1,15 +1,6 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-JQY3245NQJ"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-JQY3245NQJ');
-</script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Perfexxxion Pro Shop</title>
@@ -853,8 +844,9 @@
       </div>
       <div class="reviews-widget-wrap">
         <div class="elfsight-app-placeholder">
-          <!-- Elfsight Google Reviews | Untitled Google Reviews -->
-          <script src="https://elfsightcdn.com/platform.js" async></script>
+          <!-- Elfsight Google Reviews. assets/consent.js adds the script only
+               once the visitor allows the reviews widget. -->
+          <div data-consent="reviews" data-src="https://elfsightcdn.com/platform.js"></div>
           <div class="elfsight-app-8f9d4335-f8e7-4c44-9703-88fb95eac8e7" data-elfsight-app-lazy></div>
         </div>
         <div class="reviews-fallback">
@@ -1028,6 +1020,14 @@
   <footer class="site-footer">
     <div class="wrap">
       <p>Perfexxxion Pro Shop &middot; Idle Hours South &amp; Valley Lanes &middot; To schedule, call Amy Danielowski at <a href="tel:+15708151026">(570) 815-1026</a></p>
+      <nav class="legal-links" aria-label="Legal">
+        <a href="privacy-policy/">Privacy Policy</a>
+        <a href="terms-of-service/">Terms of Service</a>
+        <a href="refund-policy/">Refund Policy</a>
+        <a href="cookie-policy/">Cookie Policy</a>
+        <a href="data-request/">Delete or Access My Data</a>
+        <button type="button" class="cookie-settings">Cookie settings</button>
+      </nav>
     </div>
   </footer>
   <script>
@@ -1036,5 +1036,6 @@
       this.setAttribute('aria-expanded', open);
     });
   </script>
+  <script src="assets/consent.js" data-ga="G-JQY3245NQJ"></script>
 </body>
 </html>

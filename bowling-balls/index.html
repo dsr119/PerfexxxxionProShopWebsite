@@ -722,6 +722,22 @@
     .modal input[readonly] { background: #f5f5f5; color: #666; }
 
 
+    .modal .consent-check {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      margin-top: 18px;
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0;
+      text-transform: none;
+      line-height: 1.45;
+      color: #333;
+    }
+    .modal .consent-check input { width: auto; margin-top: 3px; flex: none; }
+    .modal .consent-check a { color: var(--purple); }
+
+
     .modal .submit-btn {
       width: 100%;
       margin-top: 22px;
@@ -1425,6 +1441,12 @@
         </select>
 
 
+        <label class="consent-check" for="fConsent">
+          <input type="checkbox" id="fConsent" required>
+          <span>I agree that Perfexxxion Pro Shop can keep my name and phone number to handle this order and call me about it (<a href="../privacy-policy/" target="_blank" rel="noopener">Privacy Policy</a>), and I accept the <a href="../terms-of-service/" target="_blank" rel="noopener">Terms</a> and <a href="../refund-policy/" target="_blank" rel="noopener">Refund Policy</a>.</span>
+        </label>
+
+
         <button class="submit-btn" id="submitBtn" onclick="submitOrder('${ballName.replace(/'/g,"\\'")}')">Submit Order</button>
       `;
       document.getElementById('modalOverlay').classList.add('open');
@@ -1453,6 +1475,12 @@
 
       if (!name || !phone || !orderLoc || !pickLoc || !weight || !fittingSpecs) {
         alert('Please fill in all fields before submitting.');
+        return;
+      }
+
+      // Nothing is sent until the customer has agreed to how it's used.
+      if (!document.getElementById('fConsent').checked) {
+        alert('Please tick the box to agree to how we use your name and phone number.');
         return;
       }
 
@@ -1536,6 +1564,14 @@
   <footer class="site-footer">
     <div class="wrap">
       <p>Perfexxxion Pro Shop &middot; Idle Hours South &amp; Valley Lanes &middot; To schedule, call Amy Danielowski at <a href="tel:+15708151026">(570) 815-1026</a></p>
+      <nav class="legal-links" aria-label="Legal">
+        <a href="../privacy-policy/">Privacy Policy</a>
+        <a href="../terms-of-service/">Terms of Service</a>
+        <a href="../refund-policy/">Refund Policy</a>
+        <a href="../cookie-policy/">Cookie Policy</a>
+        <a href="../data-request/">Delete or Access My Data</a>
+        <button type="button" class="cookie-settings">Cookie settings</button>
+      </nav>
     </div>
   </footer>
   <script>
@@ -1544,5 +1580,6 @@
       this.setAttribute('aria-expanded', open);
     });
   </script>
+  <script src="../assets/consent.js"></script>
 </body>
 </html>
