@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 450" role="img" aria-label="Bowling lane with target arrows for a lesson">
+  <defs><linearGradient id="lane" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#b9783f"/><stop offset="1" stop-color="#e2ad74"/></linearGradient></defs>
+  <rect width="1200" height="450" fill="#1f2937"/>
+  <polygon points="520,0 680,0 980,450 220,450" fill="url(#lane)"/>
+  <g fill="#7c2d12"><polygon points="520,250 536,280 504,280"/><polygon points="570,230 586,260 554,260"/><polygon points="620,210 636,240 604,240"/><polygon points="670,230 686,260 654,260"/><polygon points="720,250 736,280 704,280"/></g>
+  <path d="M420 440 C 470 330, 600 200, 610 20" fill="none" stroke="#7b2fbe" stroke-width="8" stroke-dasharray="20 14" stroke-linecap="round"/>
+  <g fill="#fff" fill-opacity=".85"><ellipse cx="400" cy="405" rx="16" ry="28"/><ellipse cx="450" cy="380" rx="16" ry="28"/></g>
+  <g transform="translate(940 120)"><rect width="150" height="200" rx="10" fill="#f9fafb"/><rect x="50" y="-12" width="50" height="24" rx="6" fill="#9ca3af"/><g stroke="#9ca3af" stroke-width="6" stroke-linecap="round"><line x1="25" y1="50" x2="125" y2="50"/><line x1="25" y1="85" x2="125" y2="85"/><line x1="25" y1="120" x2="100" y2="120"/></g><path d="M30 160 l15 15 l30 -35" fill="none" stroke="#16a34a" stroke-width="8" stroke-linecap="round"/></g>
+</svg>

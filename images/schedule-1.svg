@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 500" role="img" aria-label="Bowling ball heading toward pins">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#111827"/><stop offset="1" stop-color="#1f2937"/></linearGradient>
+    <linearGradient id="lane" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d9a066"/><stop offset="1" stop-color="#b9783f"/></linearGradient>
+    <radialGradient id="ball" cx="35%" cy="30%" r="75%"><stop offset="0" stop-color="#b277e8"/><stop offset=".55" stop-color="#7b2fbe"/><stop offset="1" stop-color="#2b0738"/></radialGradient>
+  </defs>
+  <rect width="1200" height="500" fill="url(#bg)"/>
+  <polygon points="470,170 730,170 1100,500 100,500" fill="url(#lane)"/>
+  <g stroke="#a86a35" stroke-opacity=".5" stroke-width="2"><line x1="520" y1="170" x2="300" y2="500"/><line x1="570" y1="170" x2="480" y2="500"/><line x1="630" y1="170" x2="720" y2="500"/><line x1="680" y1="170" x2="900" y2="500"/></g>
+  <g fill="#7c2d12"><polygon points="560,330 572,350 548,350"/><polygon points="600,330 612,350 588,350"/><polygon points="640,330 652,350 628,350"/></g>
+  <g transform="translate(600 92) scale(.55)"><g><path d="M0 0c-14 0-20 14-17 30 2 12 9 18 9 26-12 16-22 40-22 70 0 40 14 64 30 64s30-24 30-64c0-30-10-54-22-70 0-8 7-14 9-26 3-16-3-30-17-30z" fill="#fafafa" stroke="#cbd5e1" stroke-width="2"/><rect x="-9" y="58" width="18" height="6" fill="#7b2fbe"/><rect x="-10" y="70" width="20" height="6" fill="#7b2fbe"/></g></g>
+  <g transform="translate(570 86) scale(.5)"><g><path d="M0 0c-14 0-20 14-17 30 2 12 9 18 9 26-12 16-22 40-22 70 0 40 14 64 30 64s30-24 30-64c0-30-10-54-22-70 0-8 7-14 9-26 3-16-3-30-17-30z" fill="#fafafa" stroke="#cbd5e1" stroke-width="2"/><rect x="-9" y="58" width="18" height="6" fill="#7b2fbe"/><rect x="-10" y="70" width="20" height="6" fill="#7b2fbe"/></g></g><g transform="translate(630 86) scale(.5)"><g><path d="M0 0c-14 0-20 14-17 30 2 12 9 18 9 26-12 16-22 40-22 70 0 40 14 64 30 64s30-24 30-64c0-30-10-54-22-70 0-8 7-14 9-26 3-16-3-30-17-30z" fill="#fafafa" stroke="#cbd5e1" stroke-width="2"/><rect x="-9" y="58" width="18" height="6" fill="#7b2fbe"/><rect x="-10" y="70" width="20" height="6" fill="#7b2fbe"/></g></g>
+  <g transform="translate(540 80) scale(.45)"><g><path d="M0 0c-14 0-20 14-17 30 2 12 9 18 9 26-12 16-22 40-22 70 0 40 14 64 30 64s30-24 30-64c0-30-10-54-22-70 0-8 7-14 9-26 3-16-3-30-17-30z" fill="#fafafa" stroke="#cbd5e1" stroke-width="2"/><rect x="-9" y="58" width="18" height="6" fill="#7b2fbe"/><rect x="-10" y="70" width="20" height="6" fill="#7b2fbe"/></g></g><g transform="translate(660 80) scale(.45)"><g><path d="M0 0c-14 0-20 14-17 30 2 12 9 18 9 26-12 16-22 40-22 70 0 40 14 64 30 64s30-24 30-64c0-30-10-54-22-70 0-8 7-14 9-26 3-16-3-30-17-30z" fill="#fafafa" stroke="#cbd5e1" stroke-width="2"/><rect x="-9" y="58" width="18" height="6" fill="#7b2fbe"/><rect x="-10" y="70" width="20" height="6" fill="#7b2fbe"/></g></g>
+  <circle cx="600" cy="420" r="70" fill="url(#ball)"/>
+  <circle cx="580" cy="390" r="9" fill="#12031a"/><circle cx="612" cy="386" r="9" fill="#12031a"/><circle cx="600" cy="425" r="11" fill="#12031a"/>
+</svg>

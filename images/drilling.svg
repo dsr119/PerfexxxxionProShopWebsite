@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 450" role="img" aria-label="Bowling ball being laid out for drilling">
+  <defs><radialGradient id="ball" cx="35%" cy="30%" r="75%"><stop offset="0" stop-color="#60a5fa"/><stop offset=".55" stop-color="#1d4ed8"/><stop offset="1" stop-color="#0b1a4a"/></radialGradient></defs>
+  <rect width="1200" height="450" fill="#111827"/>
+  <rect x="0" y="380" width="1200" height="70" fill="#374151"/>
+  <circle cx="560" cy="240" r="150" fill="url(#ball)"/>
+  <g fill="none" stroke="#fde68a" stroke-width="3" stroke-dasharray="10 8"><line x1="560" y1="90" x2="560" y2="390"/><line x1="410" y1="240" x2="710" y2="240"/></g>
+  <circle cx="525" cy="185" r="18" fill="#030712"/><circle cx="595" cy="180" r="18" fill="#030712"/><circle cx="560" cy="285" r="24" fill="#030712"/>
+  <g transform="translate(820 40)"><rect x="0" y="0" width="120" height="90" rx="8" fill="#9ca3af"/><rect x="45" y="90" width="30" height="60" fill="#6b7280"/><polygon points="50,150 70,150 60,190" fill="#d1d5db"/></g>
+  <g fill="#7b2fbe"><rect x="760" y="300" width="260" height="10" rx="5"/><rect x="760" y="320" width="200" height="10" rx="5"/></g>
+</svg>
