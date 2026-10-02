@@ -351,7 +351,6 @@
       font-family: 'Raleway', sans-serif;
       font-size: 0.85rem;
       width: 220px;
-      outline: none;
       transition: border-color 0.2s;
     }
 
@@ -414,7 +413,6 @@
       padding: 9px 10px;
       font-family: inherit;
       font-size: 0.8rem;
-      outline: none;
     }
 
 
@@ -710,7 +708,6 @@
       font-family: 'Raleway', sans-serif;
       font-size: 0.9rem;
       color: #111;
-      outline: none;
       transition: border-color 0.2s;
     }
 
@@ -877,7 +874,7 @@
     <div class="staff-picks-inner">
       <div class="staff-picks-header">
         <div><h2 id="staffPicksTitle">Staff Picks</h2><p>See what the Perfexxxion team keeps in their bags.</p></div>
-        <div class="staff-tabs" id="staffTabs" aria-label="Choose a staff member"></div>
+        <div class="staff-tabs" id="staffTabs" role="group" aria-label="Choose a staff member"></div>
         <select class="staff-mobile-select" id="staffMobileSelect" aria-label="Choose a staff member"></select>
       </div>
       <div id="staffBag"><div class="staff-status">Loading staff picks…</div></div>
@@ -895,14 +892,14 @@
       <h2 class="filter-title">Filter products</h2>
       <details class="filter-group" open><summary>Category</summary><div class="filter-group-content">
         <nav class="category-nav" id="categoryFilters" aria-label="Bowling ball categories">
-          <button class="category-btn active" data-category="All"><strong>All Categories</strong><span class="category-count">0 balls</span></button>
-          <button class="category-btn" data-category="Reactive"><strong>Performance / Reactive</strong><span class="category-count">0 balls</span></button>
-          <button class="category-btn" data-category="Urethane"><strong>Urethane</strong><span class="category-count">0 balls</span></button>
-          <button class="category-btn" data-category="Spare"><strong>Spare &amp; Plastic</strong><span class="category-count">0 balls</span></button>
+          <button type="button" class="category-btn active" data-category="All" aria-pressed="true"><strong>All Categories</strong><span class="category-count">0 balls</span></button>
+          <button type="button" class="category-btn" data-category="Reactive" aria-pressed="false"><strong>Performance / Reactive</strong><span class="category-count">0 balls</span></button>
+          <button type="button" class="category-btn" data-category="Urethane" aria-pressed="false"><strong>Urethane</strong><span class="category-count">0 balls</span></button>
+          <button type="button" class="category-btn" data-category="Spare" aria-pressed="false"><strong>Spare &amp; Plastic</strong><span class="category-count">0 balls</span></button>
         </nav>
       </div></details>
       <details class="filter-group" open><summary>Brand</summary><div class="filter-group-content">
-        <div class="brand-filters" id="brandFilters"><button class="active" data-brand="All">All Brands</button></div>
+        <div class="brand-filters" id="brandFilters" role="group" aria-label="Brand"><button type="button" class="active" data-brand="All" aria-pressed="true">All Brands</button></div>
       </div></details>
       <details class="filter-group" open><summary>Ball specifications</summary><div class="filter-group-content filter-selects">
         <select id="finishFilter" aria-label="Cover finish"><option value="All">All Cover Finishes</option><option value="Solid">Solid</option><option value="Hybrid">Hybrid</option><option value="Pearl">Pearl</option></select>
@@ -910,33 +907,33 @@
         <select id="oilFilter" aria-label="Oil condition"><option value="All">All Oil Conditions</option><option value="Heavy">Heavy</option><option value="Medium-Heavy">Medium-Heavy</option><option value="Medium">Medium</option><option value="Light-Medium">Light-Medium</option><option value="Light">Light</option></select>
         <select id="sortFilter" aria-label="Sort products"><option value="newest">Newest Releases</option><option value="name">Name A–Z</option><option value="priceLow">Price: Low to High</option><option value="priceHigh">Price: High to Low</option></select>
       </div></details>
-      <button class="reset-btn" id="resetFilters">Reset Filters</button>
+      <button type="button" class="reset-btn" id="resetFilters">Reset Filters</button>
     </aside>
 
 
     <section class="catalog-content">
       <div class="collection-toolbar">
-        <button class="mobile-filter-btn" id="mobileFilterBtn" type="button">Filters</button>
-        <span class="results-label" id="resultsLabel"></span>
+        <button class="mobile-filter-btn" id="mobileFilterBtn" type="button" aria-expanded="false" aria-controls="filterSidebar">Filters</button>
+        <span class="results-label" id="resultsLabel" aria-live="polite"></span>
         <div class="search-wrap">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35M17 11A6 6 0 1 1 5 11a6 6 0 0 1 12 0z"/></svg>
-          <input type="text" id="searchInput" placeholder="Search bowling balls…" />
+          <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35M17 11A6 6 0 1 1 5 11a6 6 0 0 1 12 0z"/></svg>
+          <input type="search" id="searchInput" placeholder="Search bowling balls…" aria-label="Search bowling balls" />
         </div>
-        <div class="view-buttons" aria-label="Product view">
-          <button class="view-btn active" id="gridViewBtn" type="button">Grid</button>
-          <button class="view-btn" id="listViewBtn" type="button">List</button>
+        <div class="view-buttons" role="group" aria-label="Product view">
+          <button class="view-btn active" id="gridViewBtn" type="button" aria-pressed="true">Grid</button>
+          <button class="view-btn" id="listViewBtn" type="button" aria-pressed="false">List</button>
         </div>
       </div>
-      <div class="catalog-sections" id="catalogSections"><div class="state-msg"><div class="spinner"></div><br>Loading products…</div></div>
+      <div class="catalog-sections" id="catalogSections"><div class="state-msg"><div class="spinner" aria-hidden="true"></div><br>Loading products…</div></div>
     </section>
   </div>
 
 
   <!-- ORDER MODAL -->
   <div class="modal-overlay" id="modalOverlay">
-    <div class="modal">
-      <button class="close-btn" id="modalClose">&times;</button>
-      <h2>Place an Order</h2>
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <button type="button" class="close-btn" id="modalClose" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <h2 id="modalTitle">Place an Order</h2>
       <div id="modalBody"></div>
     </div>
   </div>
@@ -1027,13 +1024,13 @@
           <div class="nr-card" style="animation: fadeUp 0.35s ${i * 0.04}s both">
             <div class="nr-card-img">
               ${isDiscontinued(p) ? '<span class="discontinued-banner">Discontinued</span>' : ''}
-              <img src="${escapeHtml(p.img)}" alt="${escapeHtml(p.name)}" loading="lazy" onerror="this.style.display='none'" />
+              <img src="${escapeHtml(p.img)}" alt="${escapeHtml(ballAlt(p))}" loading="lazy" onerror="this.style.display='none'" />
             </div>
             <div class="nr-card-body">
               <div class="nr-card-brand">${p.brand}</div>
               <div class="nr-card-name">${p.name}</div>
               <div class="nr-card-price">${p.price}</div>
-              <button class="nr-card-btn" onclick="openModal('${p.name.replace(/'/g,"\\'")}')">Order</button>
+              <button type="button" class="nr-card-btn" aria-label="Order ${escapeHtml(p.name)}" onclick="openModal('${p.name.replace(/'/g,"\\'")}')">Order</button>
             </div>
           </div>`).join('');
       })
@@ -1110,6 +1107,18 @@
     }
 
 
+    // Alt text for a ball photo, e.g. "Storm Phaze II bowling ball". The
+    // catalog names usually lead with the brand already, so it is only added
+    // when they don't.
+    function ballAlt(product) {
+      const name = String(product.name || '').trim();
+      const brand = String(product.brand || '').trim();
+      if (!name) return brand ? brand + ' bowling ball' : 'Bowling ball';
+      const label = brand && !name.toLowerCase().startsWith(brand.toLowerCase()) ? brand + ' ' + name : name;
+      return label + ' bowling ball';
+    }
+
+
     function isDiscontinued(product) {
       return /^(?:yes|true|discontinued)$/i.test(String(product?.discontinued || '').trim());
     }
@@ -1152,7 +1161,7 @@
 
 
       document.getElementById('staffTabs').innerHTML = staffBags.map((bag, index) =>
-        '<button class="staff-tab' + (index === activeStaff ? ' active' : '') + '" type="button" data-staff-index="' + index + '">' +
+        '<button class="staff-tab' + (index === activeStaff ? ' active' : '') + '" type="button" aria-pressed="' + (index === activeStaff) + '" data-staff-index="' + index + '">' +
         escapeHtml(bag.member) + '</button>'
       ).join('');
 
@@ -1172,11 +1181,11 @@
         return '<article class="staff-pick-card"><div class="staff-pick-img">' +
           (isDiscontinued(product) ? '<span class="discontinued-banner">Discontinued</span>' : '') +
           '<img src="' + escapeHtml(product.img) +
-          '" alt="' + escapeHtml(product.name) + '" loading="lazy" onerror="this.style.display=\'none\'" /></div>' +
+          '" alt="' + escapeHtml(ballAlt(product)) + '" loading="lazy" onerror="this.style.display=\'none\'" /></div>' +
           '<div class="staff-pick-body"><div class="staff-pick-brand">' + escapeHtml(product.brand) + '</div>' +
           '<div class="staff-pick-name">' + escapeHtml(product.name) + '</div><div class="staff-pick-price">' +
-          escapeHtml(product.price) + '</div><div class="staff-pick-order"><button class="staff-order-button" data-ball-name="' +
-          escapeHtml(product.name) + '">Order</button></div></div></article>';
+          escapeHtml(product.price) + '</div><div class="staff-pick-order"><button type="button" class="staff-order-button" aria-label="Order ' +
+          escapeHtml(product.name) + '" data-ball-name="' + escapeHtml(product.name) + '">Order</button></div></div></article>';
       }).join('');
 
 
@@ -1212,6 +1221,8 @@
 
       brands.forEach(brand => {
         const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.setAttribute('aria-pressed', 'false');
         btn.dataset.brand = brand;
         btn.textContent = brand;
         brandContainer.appendChild(btn);
@@ -1221,9 +1232,7 @@
       brandContainer.addEventListener('click', event => {
         if (!event.target.matches('button')) return;
         activeFilter = event.target.dataset.brand;
-        brandContainer.querySelectorAll('button').forEach(btn =>
-          btn.classList.toggle('active', btn.dataset.brand === activeFilter)
-        );
+        brandContainer.querySelectorAll('button').forEach(btn => setPressed(btn, btn.dataset.brand === activeFilter));
         renderCards();
       });
 
@@ -1232,9 +1241,7 @@
         const btn = event.target.closest('.category-btn');
         if (!btn) return;
         activeCategory = btn.dataset.category;
-        document.querySelectorAll('.category-btn').forEach(item =>
-          item.classList.toggle('active', item === btn)
-        );
+        document.querySelectorAll('.category-btn').forEach(item => setPressed(item, item === btn));
         renderCards();
       });
 
@@ -1252,8 +1259,9 @@
       });
 
 
-      document.getElementById('mobileFilterBtn').addEventListener('click', () => {
-        document.getElementById('filterSidebar').classList.toggle('open');
+      document.getElementById('mobileFilterBtn').addEventListener('click', event => {
+        const open = document.getElementById('filterSidebar').classList.toggle('open');
+        event.currentTarget.setAttribute('aria-expanded', open);
       });
 
 
@@ -1270,8 +1278,16 @@
 
     function setCatalogView(useList) {
       document.getElementById('catalogSections').classList.toggle('list-view', useList);
-      document.getElementById('gridViewBtn').classList.toggle('active', !useList);
-      document.getElementById('listViewBtn').classList.toggle('active', useList);
+      setPressed(document.getElementById('gridViewBtn'), !useList);
+      setPressed(document.getElementById('listViewBtn'), useList);
+    }
+
+
+    // The filter and view buttons are toggles: the purple "active" look for
+    // sighted users, aria-pressed for screen readers.
+    function setPressed(button, pressed) {
+      button.classList.toggle('active', pressed);
+      button.setAttribute('aria-pressed', pressed);
     }
 
 
@@ -1283,8 +1299,8 @@
       document.getElementById('coreFilter').value = 'All';
       document.getElementById('oilFilter').value = 'All';
       document.getElementById('sortFilter').value = 'newest';
-      document.querySelectorAll('#brandFilters button').forEach(btn => btn.classList.toggle('active', btn.dataset.brand === 'All'));
-      document.querySelectorAll('.category-btn').forEach(btn => btn.classList.toggle('active', btn.dataset.category === 'All'));
+      document.querySelectorAll('#brandFilters button').forEach(btn => setPressed(btn, btn.dataset.brand === 'All'));
+      document.querySelectorAll('.category-btn').forEach(btn => setPressed(btn, btn.dataset.category === 'All'));
       renderCards();
     }
 
@@ -1338,12 +1354,12 @@
       return '<article class="card" style="animation-delay:' + (index * 0.025) + 's">' +
         '<div class="card-img">' +
         (isDiscontinued(product) ? '<span class="discontinued-banner">Discontinued</span>' : '') +
-        '<img src="' + escapeHtml(product.img) + '" alt="' + escapeHtml(product.name) +
+        '<img src="' + escapeHtml(product.img) + '" alt="' + escapeHtml(ballAlt(product)) +
         '" loading="lazy" onerror="this.style.display=\'none\'" /></div>' +
         '<div class="card-body"><div class="card-brand">' + escapeHtml(product.brand) + '</div>' +
         '<div class="card-name">' + escapeHtml(product.name) + '</div><div class="card-price">' + escapeHtml(product.price) + '</div>' +
-        '<div class="card-tags">' + tags + '</div><div class="card-order-btn"><button class="order-button" data-ball-name="' +
-        escapeHtml(product.name) + '">Order</button></div></div></article>';
+        '<div class="card-tags">' + tags + '</div><div class="card-order-btn"><button type="button" class="order-button" aria-label="Order ' +
+        escapeHtml(product.name) + '" data-ball-name="' + escapeHtml(product.name) + '">Order</button></div></div></article>';
     }
 
 
@@ -1384,12 +1400,12 @@
         ${discontinuedNotice}
 
 
-        <label>Name</label>
-        <input type="text" id="fName" placeholder="Your full name" />
+        <label for="fName">Name</label>
+        <input type="text" id="fName" placeholder="Your full name" autocomplete="name" />
 
 
-        <label>Phone Number</label>
-        <input type="tel" id="fPhone" placeholder="(555) 555-5555" />
+        <label for="fPhone">Phone Number</label>
+        <input type="tel" id="fPhone" placeholder="(555) 555-5555" autocomplete="tel" />
 
 
         <label for="fOrderLoc">Order Location</label>
@@ -1406,11 +1422,11 @@
         </select>
 
 
-        <label>Bowling Ball</label>
+        <label for="fBall">Bowling Ball</label>
         <input type="text" id="fBall" value="${ballName}" readonly />
 
 
-        <label>Ball Weight</label>
+        <label for="fWeight">Ball Weight</label>
         <select id="fWeight">
           <option value="">-- Select weight --</option>
           ${[6,7,8,9,10,11,12,13,14,15,16].map(w => `<option>${w} lb</option>`).join('')}
@@ -1425,9 +1441,9 @@
         </select>
 
 
-        <button class="submit-btn" id="submitBtn" onclick="submitOrder('${ballName.replace(/'/g,"\\'")}')">Submit Order</button>
+        <button type="button" class="submit-btn" id="submitBtn" onclick="submitOrder('${ballName.replace(/'/g,"\\'")}')">Submit Order</button>
       `;
-      document.getElementById('modalOverlay').classList.add('open');
+      showModal();
     };
 
 
@@ -1505,11 +1521,13 @@
 
         document.getElementById('modalBody').innerHTML = `
           <div class="success-box">
-            <div class="icon">✅</div>
-            <h3>Order Received!</h3>
+            <div class="icon" aria-hidden="true">✅</div>
+            <h3 id="orderReceived" tabindex="-1">Order Received!</h3>
             <p><strong>${escapeHtml(ball)}</strong> (${escapeHtml(weight)}) has been submitted.</p>
             <p>We'll reach out to you at <strong>${escapeHtml(normalizePhone(phone))}</strong> to confirm.</p>
           </div>`;
+        // The Submit button that had focus is gone; land on the confirmation.
+        document.getElementById('orderReceived').focus();
       } catch (err) {
         console.error('Order submission failed:', err);
         btn.disabled = false;
@@ -1523,13 +1541,65 @@
     };
 
 
-    document.getElementById('modalClose').addEventListener('click', () =>
-      document.getElementById('modalOverlay').classList.remove('open'));
+    // Keyboard handling for the order dialog: focus moves into it when it
+    // opens, Tab stays inside it, Escape closes it, and focus goes back to the
+    // Order button that opened it.
+    const modalOverlay = document.getElementById('modalOverlay');
+    let modalOpener = null;
 
 
-    document.getElementById('modalOverlay').addEventListener('click', e => {
-      if (e.target === document.getElementById('modalOverlay'))
-        document.getElementById('modalOverlay').classList.remove('open');
+    function showModal() {
+      modalOpener = document.activeElement;
+      modalOverlay.classList.add('open');
+      const first = document.getElementById('fName');
+      (first || document.getElementById('modalClose')).focus();
+    }
+
+
+    function closeModal() {
+      if (!modalOverlay.classList.contains('open')) return;
+      modalOverlay.classList.remove('open');
+      if (modalOpener && document.contains(modalOpener)) modalOpener.focus();
+      modalOpener = null;
+    }
+
+
+    function modalFocusables() {
+      return [...modalOverlay.querySelectorAll('button, input, select, textarea, a[href], [tabindex]:not([tabindex="-1"])')]
+        .filter(el => !el.disabled && el.offsetParent !== null);
+    }
+
+
+    document.addEventListener('keydown', event => {
+      if (!modalOverlay.classList.contains('open')) return;
+      if (event.key === 'Escape') {
+        event.preventDefault();
+        closeModal();
+        return;
+      }
+      if (event.key !== 'Tab') return;
+      const items = modalFocusables();
+      if (!items.length) return;
+      const first = items[0];
+      const last = items[items.length - 1];
+      if (!modalOverlay.contains(document.activeElement)) {
+        event.preventDefault();
+        first.focus();
+      } else if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    });
+
+
+    document.getElementById('modalClose').addEventListener('click', closeModal);
+
+
+    modalOverlay.addEventListener('click', e => {
+      if (e.target === modalOverlay) closeModal();
     });
   </script>
   </main>
@@ -1538,11 +1608,6 @@
       <p>Perfexxxion Pro Shop &middot; Idle Hours South &amp; Valley Lanes &middot; To schedule, call Amy Danielowski at <a href="tel:+15708151026">(570) 815-1026</a></p>
     </div>
   </footer>
-  <script>
-    document.querySelector('.menu-toggle').addEventListener('click', function () {
-      var open = document.body.classList.toggle('nav-open');
-      this.setAttribute('aria-expanded', open);
-    });
-  </script>
+  <script src="../assets/nav.js"></script>
 </body>
 </html>
