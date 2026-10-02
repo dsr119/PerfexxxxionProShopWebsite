@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Perfexxxion Pro Shop - Schedule an Appointment</title>
+  <meta name="description" content="Coaching">
+  <meta property="og:title" content="Perfexxxion Pro Shop - Schedule an Appointment">
+  <meta property="og:description" content="Coaching">
+  <link rel="icon" href="../images/logo.png">
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to main content</a>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="../">
+        <img class="logo" src="../images/logo.png" alt="" onerror="this.remove()">
+        <span>Perfexxxion Pro Shop</span>
+      </a>
+      <button class="menu-toggle" aria-expanded="false" aria-controls="site-nav">Menu</button>
+      <nav id="site-nav" class="site-nav" aria-label="Main">
+        <ul>
+          <li><a href="../">Home</a></li>
+          <li><a href="../bowling-balls/">Bowling Balls</a></li>
+          <li><a href="../about-us/">About Us</a></li>
+          <li class="has-sub"><a href="../schedule-an-appointment/" aria-current="page">Schedule an Appointment</a><ul class="sub"><li><a href="../schedule-an-appointment/drillingfitting/">Drilling/Fitting</a></li><li><a href="../schedule-an-appointment/lesson/">Lesson</a></li></ul></li>
+          <li><a href="../contact-us/">Contact Us</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <main id="main">
+    <section class="wrap content">
+      <h1>Looking to make an Appointment?</h1>
+      <img class="photo" src="../images/schedule-1.jpg" alt="" loading="lazy" onerror="this.remove()">
+      <h2 id="coaching">Coaching</h2>
+      <p>Keith offers coaching services to bowlers aspiring to get better at the game. Whether you bowl one-handed or two-handed, are new to the game or have years of experience, Keith can help you succeed!</p>
+      <p><a class="button" href="../schedule-an-appointment/lesson/">Schedule a Coaching Lesson!</a></p>
+      <h2 id="drilling">Drilling</h2>
+      <p>A house ball just doesn't cut it. Even for a casual bowler, having a ball fitted to your hand makes a world of difference. Hand pain and higher scores are two ways a correctly fitted ball can affect your game.</p>
+      <p><a class="button" href="../schedule-an-appointment/drillingfitting/">Schedule a Drilling Appointment!</a></p>
+      <img class="photo" src="../images/schedule-2.jpg" alt="" loading="lazy" onerror="this.remove()">
+    </section>
+  </main>
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>Perfexxxion Pro Shop &middot; To schedule, call Amy Danielowski at <a href="tel:+15708155580">(570) 815-5580</a></p>
+    </div>
+  </footer>
+  <script>
+    document.querySelector('.menu-toggle').addEventListener('click', function () {
+      var open = document.body.classList.toggle('nav-open');
+      this.setAttribute('aria-expanded', open);
+    });
+  </script>
+</body>
+</html>
