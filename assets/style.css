@@ -1,3 +1,45 @@
+/* Raleway, served from this repo instead of Google Fonts (SIL Open Font
+   License, see fonts/OFL.txt). Latin subset, the weights the pages use. */
+@font-face {
+  font-family: "Raleway";
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url("fonts/raleway-latin-300-normal.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Raleway";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("fonts/raleway-latin-400-normal.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Raleway";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("fonts/raleway-latin-500-normal.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Raleway";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("fonts/raleway-latin-600-normal.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Raleway";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("fonts/raleway-latin-700-normal.woff2") format("woff2");
+}
+
 :root {
   --bg: #ffffff;
   --text: #1f2933;
