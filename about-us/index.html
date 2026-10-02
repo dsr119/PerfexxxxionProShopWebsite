@@ -4,13 +4,303 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Perfexxxion Pro Shop - About Us</title>
-  <meta name="description" content="About Us">
+  <meta name="description" content="Meet the bowlers, fitters, and equipment specialists behind Perfexxxxion Pro Shop in Northeastern Pennsylvania.">
   <meta property="og:title" content="Perfexxxion Pro Shop - About Us">
-  <meta property="og:description" content="About Us">
+  <meta property="og:description" content="Meet the bowlers, fitters, and equipment specialists behind Perfexxxxion Pro Shop in Northeastern Pennsylvania.">
   <link rel="icon" href="../images/logo.svg">
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../assets/style.css">
+  <style>
+:root {
+  --ink: #1c1028;
+  --ink-soft: #4f4458;
+  --plum: #2b0738;
+  --plum-2: #461355;
+  --aqua: #79e6dc;
+  --aqua-deep: #3fc8bd;
+  --cream: #f8f5ef;
+  --white: #ffffff;
+  --line: #ded8e2;
+  --shell: min(1180px, calc(100% - 40px));
+  --display: "Arial Narrow", "Roboto Condensed", Impact, sans-serif;
+  --body: Inter, system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+}
+
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body.about-page { margin: 0; color: var(--ink); background: var(--cream); font-family: var(--body); -webkit-font-smoothing: antialiased; }
+img { display: block; max-width: 100%; }
+.about-page main a { color: inherit; }
+button, summary, a { -webkit-tap-highlight-color: transparent; }
+.shell { width: var(--shell); margin-inline: auto; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+
+
+
+
+.ab-hero { position: relative; overflow: hidden; min-height: 760px; padding: 170px 0 96px; color: var(--white); background: linear-gradient(118deg, #21052d 0%, #351044 58%, #461454 100%); }
+.ab-hero::before { content: ""; position: absolute; inset: 0; opacity: .16; background-image: linear-gradient(rgba(255,255,255,.06) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.06) 1px, transparent 1px); background-size: 48px 48px; mask-image: linear-gradient(90deg, black, transparent 72%); }
+.ab-hero-glow { position: absolute; width: 580px; height: 580px; border-radius: 50%; right: -130px; top: 70px; background: rgba(121,230,220,.14); filter: blur(2px); }
+.ab-hero-grid { position: relative; display: grid; grid-template-columns: .86fr 1.14fr; align-items: center; gap: 72px; }
+.eyebrow, .section-kicker { margin: 0 0 22px; color: var(--aqua); text-transform: uppercase; font-size: 11px; font-weight: 800; letter-spacing: .18em; }
+.eyebrow { display: flex; align-items: center; gap: 10px; }
+.eyebrow span { width: 28px; height: 2px; background: var(--aqua); }
+.ab-hero h1, .section-heading h2, .promise h2, .appointment h2 { margin: 0; font-family: var(--display); text-transform: uppercase; font-weight: 800; line-height: .88; letter-spacing: -.025em; }
+.ab-hero h1 { font-size: clamp(64px, 7.7vw, 108px); }
+.ab-hero h1 em, .section-heading h2 em, .appointment h2 em { color: var(--aqua); font-style: normal; }
+.ab-hero-lede { max-width: 580px; margin: 32px 0 0; color: rgba(255,255,255,.76); font-size: 17px; line-height: 1.75; }
+.ab-hero-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 30px; margin-top: 38px; }
+.ab-button { min-height: 52px; display: inline-flex; align-items: center; justify-content: center; gap: 28px; padding: 0 22px; border-radius: 3px; text-decoration: none; font-size: 13px; font-weight: 800; }
+.ab-button-primary { background: var(--aqua); color: var(--ink); box-shadow: 0 10px 30px rgba(0,0,0,.17); }
+.ab-button-primary:hover { background: var(--white); }
+.text-link { text-underline-offset: 5px; text-decoration-color: rgba(255,255,255,.35); font-size: 13px; font-weight: 700; }
+.ab-hero-visual { position: relative; }
+.photo-frame { position: relative; padding: 12px; border: 1px solid rgba(121,230,220,.48); transform: rotate(1.1deg); }
+.photo-frame::before { content: ""; position: absolute; inset: 27px -16px -16px 27px; border: 1px solid rgba(121,230,220,.25); z-index: -1; }
+.photo-frame img { width: 100%; min-height: 420px; object-fit: cover; object-position: center; filter: saturate(.82) contrast(1.03); }
+.photo-frame::after { content: ""; position: absolute; inset: 12px; background: linear-gradient(180deg, transparent 60%, rgba(32,5,43,.78)); }
+.photo-tag { position: absolute; z-index: 1; left: 38px; bottom: 34px; display: flex; flex-direction: column; font-family: var(--display); text-transform: uppercase; }
+.photo-tag strong { font-size: 30px; line-height: 1; }
+.photo-tag span { margin-top: 4px; color: var(--aqua); font-size: 17px; letter-spacing: .08em; }
+.experience-badge { position: absolute; top: -38px; right: -30px; width: 134px; height: 134px; border-radius: 50%; background: var(--aqua); color: var(--ink); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; box-shadow: 0 12px 35px rgba(0,0,0,.25); transform: rotate(7deg); }
+.experience-badge strong { font-family: var(--display); font-size: 20px; }
+.experience-badge span { font-size: 10px; line-height: 1.35; font-weight: 700; text-transform: uppercase; }
+
+
+.promise { padding: 100px 0; background: var(--aqua); }
+.promise-grid { display: grid; grid-template-columns: .85fr 1.1fr .85fr; gap: 70px; align-items: center; }
+.promise .section-kicker { color: rgba(28,16,40,.62); margin-bottom: 17px; }
+.promise h2 { font-size: clamp(48px, 5vw, 68px); }
+.promise-grid > p { max-width: 570px; margin: 0; line-height: 1.8; font-size: 16px; }
+.promise-points { display: grid; gap: 19px; }
+.promise-points span { display: flex; align-items: center; gap: 14px; padding-bottom: 17px; border-bottom: 1px solid rgba(28,16,40,.24); font-family: var(--display); font-weight: 700; font-size: 18px; text-transform: uppercase; }
+.promise-points b { font-family: var(--body); font-size: 10px; letter-spacing: .1em; }
+
+
+.team-section { padding: 120px 0 130px; }
+.section-heading { display: flex; justify-content: space-between; align-items: end; gap: 50px; margin-bottom: 58px; }
+.section-heading .section-kicker { color: var(--plum-2); }
+.section-heading h2 { font-size: clamp(56px, 6.2vw, 84px); }
+.section-heading h2 em { color: var(--plum-2); }
+.section-heading > p { max-width: 360px; margin: 0 0 7px; color: var(--ink-soft); line-height: 1.7; }
+.team-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 24px; align-items: start; }
+.team-card { grid-column: span 2; overflow: hidden; background: var(--white); border: 1px solid var(--line); border-radius: 5px; box-shadow: 0 14px 40px rgba(37,17,49,.05); }
+.team-card-featured { grid-column: span 3; }
+.member-photo { position: relative; aspect-ratio: 1.25 / 1; overflow: hidden; background: #ddd; }
+.member-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center; transition: transform .5s ease; }
+.team-card:hover .member-photo img { transform: scale(1.025); }
+.team-card-featured .member-photo { aspect-ratio: 1.65 / 1; }
+.team-card-featured:first-child .member-photo img { object-position: 26% center; }
+.member-photo-amy img { object-position: 73% center; }
+.member-photo-james img { object-position: 68% center; }
+.member-photo-tim img { object-position: 70% center; }
+.member-photo-joe img { object-position: 64% center; }
+.member-photo-brian img { object-position: 79% center; }
+.member-photo-doug img { object-position: center 27%; }
+.staff-badge { position: absolute; left: 16px; bottom: 16px; padding: 8px 10px; color: var(--ink); background: var(--aqua); text-transform: uppercase; font-size: 9px; font-weight: 800; letter-spacing: .1em; border-radius: 2px; }
+.member-info { padding: 25px 25px 26px; }
+.member-role { margin: 0 0 8px; color: #765d7e; font-size: 10px; text-transform: uppercase; font-weight: 800; letter-spacing: .15em; }
+.member-info h3 { margin: 0; font-family: var(--display); font-size: 34px; line-height: 1; text-transform: uppercase; }
+.member-summary { min-height: 70px; margin: 17px 0 21px; color: var(--ink-soft); font-size: 13px; line-height: 1.7; }
+.bio-details { border-top: 1px solid var(--line); }
+.bio-details summary { padding-top: 18px; list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 20px; font-size: 12px; font-weight: 800; }
+.bio-details summary::-webkit-details-marker { display: none; }
+.bio-details summary span { color: var(--plum-2); font-size: 22px; font-weight: 400; transition: transform .2s; }
+.bio-details[open] summary span { transform: rotate(45deg); }
+.bio-copy { padding: 12px 0 2px; color: var(--ink-soft); font-size: 13px; line-height: 1.75; }
+.bio-copy p { margin: 0 0 12px; }
+
+
+.appointment { position: relative; overflow: hidden; padding: 110px 0; color: var(--white); background: var(--plum); }
+.appointment-inner { position: relative; z-index: 1; display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 100px; }
+.section-kicker-light { color: var(--aqua); }
+.appointment h2 { font-size: clamp(64px, 7vw, 94px); }
+.appointment-copy > p { max-width: 530px; margin: 0; color: rgba(255,255,255,.72); line-height: 1.8; font-size: 17px; }
+.appointment-actions { display: flex; align-items: center; gap: 36px; margin-top: 34px; }
+.ab-button-light { color: var(--ink); background: var(--aqua); }
+.phone-link { display: flex; flex-direction: column; text-decoration: none; }
+.phone-link small { color: rgba(255,255,255,.56); font-size: 10px; text-transform: uppercase; letter-spacing: .12em; }
+.phone-link strong { margin-top: 5px; font-family: var(--display); font-size: 22px; }
+.lane-line { position: absolute; right: -70px; width: 520px; height: 2px; background: rgba(121,230,220,.17); transform: rotate(-30deg); }
+.lane-line-one { top: 20%; }
+.lane-line-two { bottom: 20%; right: 30px; }
+
+
+
+
+@media (max-width: 980px) {
+  .ab-hero { padding-top: 140px; }
+  .ab-hero-grid { grid-template-columns: 1fr; gap: 80px; }
+  .ab-hero-copy { max-width: 700px; }
+  .ab-hero-visual { max-width: 740px; }
+  .promise-grid { grid-template-columns: 1fr 1.4fr; }
+  .promise-points { grid-column: 1 / -1; grid-template-columns: repeat(3, 1fr); }
+  .team-card, .team-card-featured { grid-column: span 3; }
+  .team-card .member-photo { aspect-ratio: 1.45 / 1; }
+  .appointment-inner { gap: 50px; }
+  .appointment-actions { align-items: flex-start; flex-direction: column; gap: 24px; }
+}
+
+
+@media (max-width: 680px) {
+  :root { --shell: min(100% - 28px, 1180px); }
+  .ab-hero { min-height: 0; padding: 125px 0 80px; }
+  .ab-hero-grid { gap: 60px; }
+  .ab-hero h1 { font-size: clamp(57px, 18vw, 76px); }
+  .ab-hero-lede { margin-top: 25px; font-size: 15px; }
+  .ab-hero-actions { align-items: flex-start; flex-direction: column; gap: 22px; }
+  .photo-frame img { min-height: 265px; }
+  .photo-tag { left: 29px; bottom: 28px; }
+  .experience-badge { width: 104px; height: 104px; right: -5px; top: -35px; }
+  .experience-badge strong { font-size: 16px; }
+  .promise { padding: 74px 0; }
+  .promise-grid { grid-template-columns: 1fr; gap: 34px; }
+  .promise-grid > p { font-size: 15px; }
+  .promise-points { grid-column: auto; grid-template-columns: 1fr; }
+  .team-section { padding: 85px 0 90px; }
+  .section-heading { display: block; margin-bottom: 40px; }
+  .section-heading h2 { font-size: 60px; }
+  .section-heading > p { margin-top: 25px; font-size: 14px; }
+  .team-grid { display: block; }
+  .team-card { margin-bottom: 18px; }
+  .team-card .member-photo, .team-card-featured .member-photo { aspect-ratio: 1.35 / 1; }
+  .member-info { padding: 23px 21px 24px; }
+  .member-summary { min-height: 0; }
+  .appointment { padding: 80px 0; }
+  .appointment-inner { grid-template-columns: 1fr; gap: 38px; }
+  .appointment h2 { font-size: 66px; }
+  .appointment-copy > p { font-size: 15px; }
+  .ab-button { width: 100%; }
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { transition-duration: .01ms !important; }
+}
+
+
+/* Simplified introduction */
+
+
+.ab-hero { min-height: 0; padding: 76px 0; color: var(--ink); background: var(--cream); }
+.ab-hero::before, .ab-hero-glow, .experience-badge, .photo-tag { display: none; }
+.ab-hero-grid { grid-template-columns: .9fr 1.1fr; gap: 68px; }
+.ab-hero .eyebrow { display: block; color: var(--plum-2); margin-bottom: 18px; }
+.ab-hero .eyebrow span { display: none; }
+.ab-hero h1 { font-size: clamp(58px, 6.4vw, 86px); line-height: .94; }
+.ab-hero h1 em { color: var(--plum-2); }
+.ab-hero-lede { max-width: 540px; margin-top: 26px; color: var(--ink-soft); font-size: 16px; line-height: 1.75; }
+.ab-hero-actions { margin-top: 30px; }
+.ab-button-primary { color: var(--white); background: var(--plum); box-shadow: none; }
+.ab-button-primary:hover { color: var(--ink); background: var(--aqua); }
+.photo-frame { padding: 0; border: 0; border-radius: 4px; overflow: hidden; transform: none; }
+.photo-frame::before, .photo-frame::after { display: none; }
+.photo-frame img { min-height: 350px; max-height: 440px; object-fit: cover; filter: none; }
+
+
+.promise { padding: 64px 0; background: var(--white); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.promise-grid { grid-template-columns: 1fr 1.25fr 1fr; gap: 55px; }
+.promise .section-kicker { color: var(--plum-2); margin-bottom: 12px; }
+.promise h2 { font-size: clamp(40px, 4vw, 54px); line-height: .98; }
+.promise-grid > p { color: var(--ink-soft); font-size: 14px; line-height: 1.75; }
+.promise-points { gap: 13px; }
+.promise-points span { padding-bottom: 12px; font-size: 15px; }
+
+
+@media (max-width: 980px) {
+  .ab-hero { padding-top: 68px; }
+  .ab-hero-grid { grid-template-columns: 1fr; gap: 42px; }
+  .promise-grid { grid-template-columns: 1fr 1fr; }
+}
+
+
+@media (max-width: 680px) {
+  .ab-hero { padding: 58px 0; }
+  .ab-hero h1 { font-size: clamp(50px, 15vw, 66px); }
+  .ab-hero-lede { font-size: 15px; }
+  .photo-frame img { min-height: 230px; }
+  .promise { padding: 50px 0; }
+  .promise-grid { grid-template-columns: 1fr; gap: 24px; }
+  .promise-points { grid-template-columns: 1fr; }
+}
+
+
+/* Full-width photographic hero */
+.ab-hero {
+  height: min(720px, 82vh);
+  min-height: 590px;
+  padding: 0;
+  color: var(--white);
+  background: var(--plum);
+}
+.ab-hero::after {
+  content: "";
+  display: block;
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(26,4,35,.92) 0%, rgba(26,4,35,.72) 34%, rgba(26,4,35,.18) 67%, rgba(26,4,35,.08) 100%);
+}
+.ab-hero-grid.shell {
+  width: 100%;
+  height: 100%;
+  min-height: inherit;
+  margin: 0;
+  display: flex;
+  align-items: center;
+}
+.ab-hero-copy {
+  position: relative;
+  z-index: 2;
+  width: var(--shell);
+  margin-inline: auto;
+}
+.ab-hero-copy > * { max-width: 520px; }
+.ab-hero .eyebrow { color: var(--aqua); }
+.ab-hero h1 { color: var(--white); text-shadow: 0 3px 20px rgba(0,0,0,.24); }
+.ab-hero h1 em { color: var(--aqua); }
+.ab-hero-lede { color: rgba(255,255,255,.84); }
+.ab-hero .ab-button-primary { color: var(--ink); background: var(--aqua); }
+.ab-hero .ab-button-primary:hover { background: var(--white); }
+.ab-hero-visual {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+}
+.ab-hero .photo-frame,
+.ab-hero .photo-frame img {
+  width: 100%;
+  height: 100%;
+  max-height: none;
+  min-height: 0;
+  border-radius: 0;
+}
+.ab-hero .photo-frame img {
+  object-fit: cover;
+  object-position: center 43%;
+}
+
+
+@media (max-width: 680px) {
+  .ab-hero {
+    height: 700px;
+    min-height: 700px;
+    padding: 0;
+  }
+  .ab-hero::after {
+    background: linear-gradient(180deg, rgba(26,4,35,.18) 0%, rgba(26,4,35,.45) 35%, rgba(26,4,35,.94) 100%);
+  }
+  .ab-hero-grid.shell { align-items: flex-end; padding-bottom: 52px; }
+  .ab-hero-copy > * { max-width: none; }
+  .ab-hero .photo-frame img { object-position: 54% center; }
+}
+
+
+  </style>
 </head>
-<body>
+<body class="about-page">
   <a class="skip" href="#main">Skip to main content</a>
   <header class="site-header">
     <div class="wrap header-inner">
@@ -31,14 +321,212 @@
     </div>
   </header>
   <main id="main">
-    <section class="wrap content">
-      <h1>About Us</h1>
-      <!-- TODO: content from the Google Site still to be added -->
+
+    <section class="ab-hero">
+      <div class="ab-hero-grid shell">
+        <div class="ab-hero-copy">
+          <p class="eyebrow">About Perfexxxxion Pro Shop</p>
+          <h1>Built by bowlers,<br><em>for bowlers.</em></h1>
+          <p class="ab-hero-lede">We’re a local team of bowlers, fitters, and equipment specialists who care about making your next visit—and your next game—better.</p>
+          <div class="ab-hero-actions">
+            <a class="ab-button ab-button-primary" href="#team">Meet the team <span aria-hidden="true">↓</span></a>
+          </div>
+        </div>
+
+
+        <div class="ab-hero-visual">
+          <div class="photo-frame">
+            <img src="images/team-hero.jpg" alt="Members of the Perfexxxxion Pro Shop bowling team together at the lanes" width="1280" height="540">
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <section class="promise" aria-labelledby="promise-title">
+      <div class="shell promise-grid">
+        <div>
+          <p class="section-kicker">Our approach</p>
+          <h2 id="promise-title">What you can expect</h2>
+        </div>
+        <p>We listen first, then help you choose the fit, layout, and equipment that make sense for your game—without the hard sell or unnecessary guesswork.</p>
+        <div class="promise-points">
+          <span><b>01</b> Personal fit</span>
+          <span><b>02</b> Honest advice</span>
+          <span><b>03</b> Lane-tested insight</span>
+        </div>
+      </div>
+    </section>
+
+
+    <section class="team-section" id="team" aria-labelledby="team-title">
+      <div class="shell">
+        <div class="section-heading">
+          <div>
+            <p class="section-kicker">The people behind the precision</p>
+            <h2 id="team-title">Meet your <em>lane crew.</em></h2>
+          </div>
+          <p>Real bowlers. Deep product knowledge. One shared goal: helping you roll your best.</p>
+        </div>
+
+
+        <div class="team-grid">
+          <article class="team-card team-card-featured">
+            <div class="member-photo">
+              <img src="images/keith.jpg" alt="Keith and Amy Danielowski at a bowling center" width="1280" height="719">
+              <span class="staff-badge">Columbia 300 staff</span>
+            </div>
+            <div class="member-info">
+              <p class="member-role">Owner · Ball driller</p>
+              <h3>Keith Danielowski</h3>
+              <p class="member-summary">The shop’s lead driller, focused on a comfortable, repeatable fit and equipment that matches how you bowl.</p>
+              <details class="bio-details">
+                <summary>Read Keith’s story <span aria-hidden="true">+</span></summary>
+                <div class="bio-copy">
+                  <p>Keith first picked up a bowling ball at 11 in the Friday Junior Leagues at Idle Hours South—then known as South Side Bowl. By 15, coaches Tre Veltri Harris, Bill Ridgeway, the late Rich Heim, and later Joe Hutchinson helped him believe he could compete at the highest levels.</p>
+                  <p>He rolled his first 300 on January 5, 1990 with a Columbia Black U Dot. A year later, he won the NY Junior Masters from the top seed after averaging 247 in qualifying. Through high school and college he added league titles, high-average honors, three more 300s, and two 800 series.</p>
+                  <p>Keith entered the pro shop world with Dave Bainbridge at Bowler’s Alley, then ran the shop at Valley Lanes beginning in 1993. Today, returning to the pro shop feels like coming full circle—using a lifetime in bowling to build better fits, stronger games, and lasting connections.</p>
+                </div>
+              </details>
+            </div>
+          </article>
+
+
+          <article class="team-card team-card-featured">
+            <div class="member-photo member-photo-amy">
+              <img src="images/amy.jpg" alt="Amy Danielowski with Keith at a bowling center" width="1280" height="719">
+              <span class="staff-badge">Co-owner</span>
+            </div>
+            <div class="member-info">
+              <p class="member-role">Business manager</p>
+              <h3>Amy Danielowski</h3>
+              <p class="member-summary">The organizer behind both locations, keeping orders, appointments, stock, and the day-to-day shop experience rolling.</p>
+              <details class="bio-details">
+                <summary>Read Amy’s story <span aria-hidden="true">+</span></summary>
+                <div class="bio-copy">
+                  <p>Amy started bowling in her early 20s in a Thursday league at South Side Bowl with her sister. She met Keith while selling 50/50 tickets to bowlers in the Times Major League, and her love for the game grew as she added leagues at Idle Hours, Valley Lanes, and Green Ridge Lanes.</p>
+                  <p>Now co-owner and business manager of both shop locations, Amy keeps the shelves stocked, manages custom orders for balls, bags, shoes, and jerseys, schedules appointments and lessons, and handles the clerical details that keep Perfexxxxion moving.</p>
+                </div>
+              </details>
+            </div>
+          </article>
+
+
+          <article class="team-card">
+            <div class="member-photo member-photo-james">
+              <img src="images/james.jpg" alt="James Durland in the pro shop" width="688" height="386">
+              <span class="staff-badge">Brunswick staff</span>
+            </div>
+            <div class="member-info">
+              <p class="member-role">Ball driller</p>
+              <h3>James Durland</h3>
+              <p class="member-summary">A lifelong bowler and experienced driller who helps customers find the right fit and equipment.</p>
+              <details class="bio-details">
+                <summary>Read James’s story <span aria-hidden="true">+</span></summary>
+                <div class="bio-copy">
+                  <p>Bowling runs in James’s family. Across 29 years on the lanes, he has rolled 12 perfect games, three 800 series, and competed collegiately for Union College in Barbourville, Kentucky.</p>
+                  <p>He began working in pro shops at 21 and has served bowlers at Pogo Family Pro Shop, Hudson Valley Bowling Supply, Strike It Rich Pro Shop, and now Perfexxxxion. Away from the lanes, James enjoys hunting, woodworking, building ball racks, and tinkering with anything mechanical.</p>
+                </div>
+              </details>
+            </div>
+          </article>
+
+
+          <article class="team-card">
+            <div class="member-photo member-photo-tim">
+              <img src="images/tim.jpg" alt="Tim Bilski at a bowling center" width="941" height="528">
+            </div>
+            <div class="member-info">
+              <p class="member-role">Team member</p>
+              <h3>Tim Bilski</h3>
+              <p class="member-summary">Part of the Perfexxxxion team, bringing a bowler’s perspective and friendly help to the shop.</p>
+              <details class="bio-details">
+                <summary>About Tim <span aria-hidden="true">+</span></summary>
+                <div class="bio-copy"><p>Tim is a valued member of the Perfexxxxion Pro Shop crew. More of his bowling story is coming soon.</p></div>
+              </details>
+            </div>
+          </article>
+
+
+          <article class="team-card">
+            <div class="member-photo member-photo-joe">
+              <img src="images/joe.png" alt="Joe Hutchinson preparing to bowl" width="512" height="288">
+            </div>
+            <div class="member-info">
+              <p class="member-role">Team member</p>
+              <h3>Joe Hutchinson</h3>
+              <p class="member-summary">A trusted presence in the local bowling community and part of the Perfexxxxion crew.</p>
+              <details class="bio-details">
+                <summary>About Joe <span aria-hidden="true">+</span></summary>
+                <div class="bio-copy"><p>Joe is a valued member of the Perfexxxxion Pro Shop team and a longtime influence in the local bowling community. More of his story is coming soon.</p></div>
+              </details>
+            </div>
+          </article>
+
+
+          <article class="team-card">
+            <div class="member-photo member-photo-brian">
+              <img src="images/brian.jpg" alt="Brian Wertz outdoors" width="1238" height="696">
+              <span class="staff-badge">Storm staff</span>
+            </div>
+            <div class="member-info">
+              <p class="member-role">Equipment specialist</p>
+              <h3>Brian Wertz</h3>
+              <p class="member-summary">The team’s SPI equipment resource, testing new Storm, Roto Grip, and 900 Global releases.</p>
+              <details class="bio-details">
+                <summary>Read Brian’s story <span aria-hidden="true">+</span></summary>
+                <div class="bio-copy">
+                  <p>Brian started bowling at six in the Friday leagues at South Side Bowl, then stepped away to pursue soccer. After an injury ended that chapter, a coworker brought him back to the lanes at Idle Hours North.</p>
+                  <p>Lessons and equipment work with Mike Markis grew into a bowling family that included Keith and Amy. Their mentorship helped Brian earn opportunities to represent Storm Products International and Turbo Grips, experience he now uses to guide customers toward the right equipment.</p>
+                </div>
+              </details>
+            </div>
+          </article>
+
+
+          <article class="team-card">
+            <div class="member-photo member-photo-doug">
+              <img src="images/doug.jpg" alt="Doug Smith at the bowling lanes" width="801" height="614">
+            </div>
+            <div class="member-info">
+              <p class="member-role">Shop technician</p>
+              <h3>Doug Smith</h3>
+              <p class="member-summary">Helps with ball plug, resurfacing, customer consultations, and whatever else keeps the shop moving.</p>
+              <details class="bio-details">
+                <summary>Read Doug’s story <span aria-hidden="true">+</span></summary>
+                <div class="bio-copy">
+                  <p>Doug fell in love with bowling on a 2022 date night after seeing a nearby bowler hook the whole lane. Keith drilled his first ball—the IQ Tour Ruby—in 2023, and Doug taught himself to bowl two-handed that summer, finishing with a 206 average and 286 high game.</p>
+                  <p>His breakout 2024–25 season included four sanctioned 300s, four more unsanctioned perfect games, and an 821 series. Grateful for the help Keith gave him, Doug joined the shop to offer customers that same kind of support.</p>
+                </div>
+              </details>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+
+    <section class="appointment" id="appointment" aria-labelledby="appointment-title">
+      <div class="shell appointment-inner">
+        <div>
+          <p class="section-kicker section-kicker-light">Your best game starts here</p>
+          <h2 id="appointment-title">Let’s find your<br><em>perfect fit.</em></h2>
+        </div>
+        <div class="appointment-copy">
+          <p>Bring us your goals, your questions, or the ball that never felt quite right. We’ll take it from there.</p>
+          <div class="appointment-actions">
+            <a class="ab-button ab-button-light" href="../schedule-an-appointment/">Schedule an appointment <span aria-hidden="true">↗</span></a>
+            <a class="phone-link" href="tel:5708151026"><small>Prefer to call?</small><strong>(570) 815-1026</strong></a>
+          </div>
+        </div>
+      </div>
+      <span class="lane-line lane-line-one" aria-hidden="true"></span>
+      <span class="lane-line lane-line-two" aria-hidden="true"></span>
     </section>
   </main>
   <footer class="site-footer">
     <div class="wrap">
-      <p>Perfexxxion Pro Shop &middot; To schedule, call Amy Danielowski at <a href="tel:+15708155580">(570) 815-5580</a></p>
+      <p>Perfexxxion Pro Shop &middot; Idle Hours South &amp; Valley Lanes &middot; To schedule, call Amy Danielowski at <a href="tel:+15708155580">(570) 815-5580</a></p>
     </div>
   </footer>
   <script>
