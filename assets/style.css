@@ -141,3 +141,22 @@ main { min-height: 60vh; }
 
 .site-footer { background: var(--header-bg); color: #d1d5db; padding: 16px 0; font-size: .95rem; }
 .site-footer a { color: #fff; }
+
+/* Shoes and Bags pages (assets/stock.js) */
+.stock-tools { display: flex; flex-wrap: wrap; gap: 12px; margin: 8px 0 12px; }
+.stock-tools label { display: flex; flex-direction: column; gap: 4px; font-weight: 600; font-size: .95rem; }
+.stock-tools input, .stock-tools select { font: inherit; padding: 8px 10px; border: 1px solid #cbd2d9; border-radius: 4px; min-width: 220px; max-width: 100%; }
+.stock-status { color: var(--muted); margin: 0 0 16px; }
+.stock-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; }
+@media (max-width: 520px) { .stock-grid { grid-template-columns: 1fr 1fr; gap: 10px; } .stock-body { padding: 10px; } .stock-tools input, .stock-tools select { min-width: 0; width: 100%; } .stock-tools label { flex: 1 1 140px; } }
+.stock-card { display: flex; flex-direction: column; border: 1px solid #e4e7eb; border-radius: 6px; overflow: hidden; background: #fff; }
+.stock-pic { aspect-ratio: 1 / 1; background: #fff; display: flex; align-items: center; justify-content: center; border-bottom: 1px solid #e4e7eb; }
+.stock-pic img { width: 100%; height: 100%; object-fit: contain; padding: 8px; }
+.stock-pic.no-pic::after { content: "Picture coming soon"; color: var(--muted); font-size: .9rem; }
+.stock-body { padding: 12px 14px 16px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
+.content .stock-name { font-size: 1.05rem; margin: 0; line-height: 1.3; }
+.stock-label { margin: 4px 0 0; font-size: .85rem; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: .04em; }
+.stock-sizes { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+.stock-sizes li { border: 1px solid var(--accent); color: var(--accent-dark); border-radius: 4px; padding: 1px 8px; font-size: .9rem; font-weight: 600; }
+.stock-price { margin: 6px 0 0; font-weight: 700; }
+.stock-ask { margin-top: auto; align-self: flex-start; }

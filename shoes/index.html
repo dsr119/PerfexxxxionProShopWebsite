@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Perfexxxion Pro Shop - Bowling Shoes</title>
+  <meta name="description" content="Bowling shoes in stock and ready to order through Perfexxxion Pro Shop.">
+  <meta property="og:title" content="Perfexxxion Pro Shop - Bowling Shoes">
+  <meta property="og:description" content="Bowling shoes in stock and ready to order through Perfexxxion Pro Shop.">
+  <link rel="icon" href="../images/logo.svg">
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to main content</a>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="../">
+        <img class="logo" src="../images/logo.svg" alt="" onerror="this.remove()">
+        <span>Perfexxxion Pro Shop</span>
+      </a>
+      <button class="menu-toggle" aria-expanded="false" aria-controls="site-nav">Menu</button>
+      <nav id="site-nav" class="site-nav" aria-label="Main">
+        <ul>
+          <li><a href="../">Home</a></li>
+          <li><a href="../bowling-balls/">Bowling Balls</a></li><li><a href="../shoes/" aria-current="page">Shoes</a></li><li><a href="../bags/">Bags</a></li>
+          <li><a href="../about-us/">About Us</a></li>
+          <li class="has-sub"><a href="../schedule-an-appointment/">Schedule an Appointment</a><ul class="sub"><li><a href="../schedule-an-appointment/drillingfitting/">Drilling/Fitting</a></li><li><a href="../schedule-an-appointment/lesson/">Lesson</a></li></ul></li>
+          <li><a href="../contact-us/">Contact Us</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <main id="main">
+    <section class="wrap content" id="stock" data-category="Shoes">
+      <h1>Bowling Shoes</h1>
+      <p>Shoes we can get for you right now, with the sizes in stock. Stock is checked every morning.</p>
+      <div class="stock-tools">
+        <label>Search<input id="stock-search" type="search" placeholder="Name or color" autocomplete="off"></label>
+        <label>Show<select id="stock-filter"><option value="">All shoes</option><option value="mens">Men's</option><option value="womens">Women's</option><option value="youth">Youth</option></select></label>
+      </div>
+      <p class="stock-status" id="stock-status" role="status">Loading what's in stock...</p>
+      <div class="stock-grid" id="stock-grid"></div>
+    </section>
+  </main>
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>Perfexxxion Pro Shop &middot; Idle Hours South &amp; Valley Lanes &middot; To schedule, call Amy Danielowski at <a href="tel:+15708151026">(570) 815-1026</a></p>
+    </div>
+  </footer>
+  <script src="../assets/nav.js"></script>
+  <script src="../assets/stock.js"></script>
+</body>
+</html>
