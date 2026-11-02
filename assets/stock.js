@@ -1,8 +1,11 @@
-// Shoes and Bags pages: what Ace Mitchell has in stock right now.
+// Shoes and Bags pages: what Ace Mitchell has in stock right now, at
+// bowling.com's price.
 //
-// A GitHub Action in ProShopAppV1C checks Ace Mitchell every morning and saves
-// the answers to Supabase. This reads the public, in-stock-only view of that
-// (no dealer cost in it) with the site's publishable key.
+// A GitHub Action in ProShopAppV1C checks Ace Mitchell every morning, matches
+// each item to bowling.com for the consumer price and picture, and saves it
+// to Supabase. This reads the public, in-stock-only view of that (no dealer
+// cost in it) with the site's publishable key. Items without a bowling.com
+// price are left off.
 //
 // Shoes are stocked per size: each size is its own code, the style number plus
 // the size times ten ("58100118 095" is size 9.5). Sizes are grouped back
@@ -26,7 +29,8 @@
 
   function fetchAll() {
     var since = new Date(Date.now() - FRESH_DAYS * 864e5).toISOString();
-    var path = 'vendor_stock_public?select=item_code,name,image_url,qty_total,checked_at' +
+    var path = 'vendor_stock_public?select=item_code,name,image_url,qty_total,checked_at,consumer_price,retail_name,retail_image' +
+      '&consumer_price=not.is.null' +
       '&category=eq.' + encodeURIComponent(category) +
       '&checked_at=gte.' + encodeURIComponent(since) + '&order=item_code.asc';
     var rows = [];
@@ -65,12 +69,19 @@
       var key = size === null ? r.item_code : r.item_code.replace(/ \d{3}$/, '');
       var item = byKey[key];
       if (!item) {
-        item = byKey[key] = { key: key, name: r.name || r.item_code, image: r.image_url, qty: 0, sizes: [] };
+        item = byKey[key] = {
+          key: key,
+          name: r.retail_name || r.name || r.item_code,
+          image: r.retail_image || r.image_url,
+          price: r.consumer_price,
+          qty: 0,
+          sizes: []
+        };
         list.push(item);
       }
       item.qty += r.qty_total;
       if (size !== null) item.sizes.push(size);
-      if (!item.image && r.image_url) item.image = r.image_url;
+      if (!item.image) item.image = r.retail_image || r.image_url;
     });
     list.forEach(function (i) { i.sizes.sort(function (a, b) { return a - b; }); });
     list.sort(function (a, b) { return a.name.localeCompare(b.name); });
@@ -116,7 +127,7 @@
     } else {
       body.appendChild(el('p', 'stock-label', 'In stock'));
     }
-    body.appendChild(el('p', 'stock-price', 'Call for price'));
+    body.appendChild(el('p', 'stock-price', item.price != null ? '$' + Number(item.price).toFixed(2) : 'Call for price'));
     var ask = el('a', 'button stock-ask', 'Ask Amy');
     ask.href = 'tel:+15708151026';
     ask.setAttribute('aria-label', 'Call Amy about ' + item.name);
@@ -142,7 +153,7 @@
   if (filter) filter.addEventListener('change', render);
 
   fetchAll().then(function (rows) {
-    items = group(rows.filter(function (r) { return r.qty_total > 0; }));
+    items = group(rows.filter(function (r) { return r.qty_total > 0 && r.consumer_price != null; }));
     // Ace Mitchell files slide soles, heels and shoe covers under Shoes too.
     // Real shoes are stocked by size, so the Shoes page keeps only those.
     if (category === 'Shoes') items = items.filter(function (i) { return i.sizes.length > 0; });
