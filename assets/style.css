@@ -163,6 +163,31 @@ main { min-height: 60vh; }
 .stock-sizes li { border: 1px solid var(--accent); color: var(--accent-dark); border-radius: 4px; padding: 1px 8px; font-size: .9rem; font-weight: 600; }
 .stock-price { margin: 6px 0 0; font-weight: 700; }
 .stock-ask { margin-top: auto; align-self: flex-start; }
+.stock-ask { border: 0; font: inherit; font-weight: 600; cursor: pointer; }
+
+/* Shoe/bag order form (assets/stock.js) */
+.order-dialog { width: min(440px, calc(100% - 32px)); max-height: calc(100% - 32px); border: 0; border-radius: 8px; padding: 22px 20px 20px; box-shadow: 0 12px 40px rgba(0,0,0,.3); color: #1f2933; }
+.order-dialog::backdrop { background: rgba(20,10,30,.6); }
+.order-close { position: absolute; top: 8px; right: 10px; background: none; border: 0; font-size: 1.8rem; line-height: 1; color: var(--muted); cursor: pointer; padding: 4px 8px; }
+.order-dialog .order-title { margin: 0 0 12px; font-size: 1.3rem; }
+.order-item { display: flex; gap: 12px; align-items: center; margin-bottom: 14px; }
+.order-item img { width: 72px; height: 72px; object-fit: contain; border: 1px solid #e4e7eb; border-radius: 4px; flex: none; }
+.order-name { margin: 0; font-weight: 700; line-height: 1.3; }
+.order-price { margin: 2px 0 0; color: var(--accent-dark); font-weight: 700; }
+.order-form { display: grid; gap: 12px; }
+.order-field { display: grid; gap: 4px; font-weight: 600; font-size: .95rem; }
+.order-field input, .order-field select { font: inherit; padding: 9px 11px; border: 1px solid #9aa5b1; border-radius: 4px; background: #fff; width: 100%; }
+.order-consent { display: flex; gap: 8px; align-items: flex-start; font-size: .88rem; }
+.order-consent input { margin-top: .3em; flex: none; }
+.order-consent a, .order-dialog a { color: var(--accent-dark); }
+.order-note { margin: 0; font-size: .88rem; color: var(--muted); }
+.order-error { margin: 0; color: #b42318; font-weight: 600; }
+.order-error:empty { display: none; }
+.order-submit { border: 0; font: inherit; font-weight: 600; cursor: pointer; width: 100%; padding: 12px; }
+.order-submit:disabled { background: #9aa5b1; cursor: not-allowed; }
+.order-done h3 { margin: 0 0 8px; }
+.order-done .button { border: 0; font: inherit; font-weight: 600; cursor: pointer; margin-top: 8px; }
+.order-dialog :focus-visible { outline: 3px solid #f5b700; outline-offset: 2px; }
 
 /* Footer legal links */
 .legal-links { display: flex; flex-wrap: wrap; gap: 4px 16px; margin: 8px 0 0; font-size: .88rem; }

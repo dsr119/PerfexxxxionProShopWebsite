@@ -14,6 +14,10 @@
 // Filters (type, balls held, men's/women's, width, hand, size, brand, color,
 // price) come from bowling.com's own filter values, saved in retail_attrs by
 // the same job. Where an item has none, they are guessed from its name.
+//
+// Order buttons open a form that saves the order straight into the orders
+// table in Supabase, the same way the Bowling Balls page does, so it shows up
+// in Amy's app (ProShopAppV1C) with source "website". Nothing is paid online.
 (function () {
   var SUPABASE_URL = 'https://ngghyuvykqqklztvvmld.supabase.co';
   var SUPABASE_KEY = 'sb_publishable_X-ZHYha1P8FPVL2rvAk-bA_CdXD8g-g';
@@ -89,12 +93,14 @@
           price: r.consumer_price,
           qty: 0,
           sizes: [],
+          codes: {}, // size -> Ace Mitchell item code
+          code: r.item_code,
           attrs: r.retail_attrs || null
         };
         list.push(item);
       }
       item.qty += r.qty_total;
-      if (size !== null) item.sizes.push(size);
+      if (size !== null) { item.sizes.push(size); item.codes[size] = r.item_code; }
       if (!item.image) item.image = r.retail_image || r.image_url;
       if (!item.attrs && r.retail_attrs) item.attrs = r.retail_attrs;
     });
@@ -326,10 +332,11 @@
       body.appendChild(el('p', 'stock-label', 'In stock'));
     }
     body.appendChild(el('p', 'stock-price', item.price != null ? '$' + Number(item.price).toFixed(2) : 'Call for price'));
-    var ask = el('a', 'button stock-ask', 'Ask Amy');
-    ask.href = 'tel:+15708151026';
-    ask.setAttribute('aria-label', 'Call Amy about ' + item.name);
-    body.appendChild(ask);
+    var order = el('button', 'button stock-ask', 'Order');
+    order.type = 'button';
+    order.setAttribute('aria-label', 'Order ' + item.name);
+    order.addEventListener('click', function () { openOrder(item); });
+    body.appendChild(order);
     c.appendChild(body);
     return c;
   }
@@ -347,8 +354,195 @@
     shown.forEach(function (i) { grid.appendChild(card(i)); });
     status.textContent = items.length
       ? (shown.length ? shown.length + ' of ' + items.length + ' ' + category.toLowerCase() + ' in stock'
-        : 'Nothing in stock matches those filters. Try fewer, or call Amy and she can order it for you.')
-      : 'Nothing in stock right now. Call Amy and she can order it for you.';
+        : 'Nothing in stock matches those filters. Try fewer, or call the shop at (570) 815-1026 and we can order it for you.')
+      : 'Nothing in stock right now. Call the shop at (570) 815-1026 and we can order it for you.';
+  }
+
+  // ---- ordering -------------------------------------------------------
+
+  // Same two houses as the Bowling Balls page; the orders table rejects
+  // anything else.
+  var LOCATIONS = ['Valley', 'South Side'];
+  var dialog = null;
+
+  // Match the format the pro shop app displays and searches on.
+  function normalizePhone(raw) {
+    var digits = String(raw || '').replace(/\D/g, '');
+    var ten = digits.length === 11 && digits.charAt(0) === '1' ? digits.slice(1) : digits;
+    return ten.length === 10 ? ten.slice(0, 3) + '-' + ten.slice(3, 6) + '-' + ten.slice(6) : String(raw || '').trim();
+  }
+
+  function field(form, labelText, control) {
+    var label = el('label', 'order-field');
+    label.appendChild(el('span', null, labelText));
+    label.appendChild(control);
+    form.appendChild(label);
+    return control;
+  }
+
+  function input(type, name, autocomplete) {
+    var i = document.createElement('input');
+    i.type = type;
+    i.name = name;
+    i.required = true;
+    if (autocomplete) i.autocomplete = autocomplete;
+    return i;
+  }
+
+  function choice(name, prompt, values) {
+    var s = document.createElement('select');
+    s.name = name;
+    s.required = true;
+    s.appendChild(option('', prompt));
+    values.forEach(function (v) { s.appendChild(option(v, v)); });
+    return s;
+  }
+
+  function getDialog() {
+    if (dialog) return dialog;
+    dialog = document.createElement('dialog');
+    dialog.className = 'order-dialog';
+    dialog.setAttribute('aria-labelledby', 'order-title');
+    // Click on the backdrop closes it.
+    dialog.addEventListener('click', function (e) { if (e.target === dialog) dialog.close(); });
+    document.body.appendChild(dialog);
+    return dialog;
+  }
+
+  function openOrder(item) {
+    var d = getDialog();
+    d.textContent = '';
+    var close = el('button', 'order-close', '\u00d7');
+    close.type = 'button';
+    close.setAttribute('aria-label', 'Close');
+    close.addEventListener('click', function () { d.close(); });
+    d.appendChild(close);
+    d.appendChild(el('h2', 'order-title', 'Place an order')).id = 'order-title';
+
+    var head = el('div', 'order-item');
+    if (item.image) {
+      var img = el('img');
+      img.src = item.image;
+      img.alt = '';
+      head.appendChild(img);
+    }
+    var info = el('div');
+    info.appendChild(el('p', 'order-name', item.name));
+    info.appendChild(el('p', 'order-price', '$' + Number(item.price).toFixed(2)));
+    head.appendChild(info);
+    d.appendChild(head);
+
+    var form = el('form', 'order-form');
+    form.noValidate = false;
+    var size = null;
+    if (item.sizes.length) {
+      size = field(form, 'Size', choice('size', 'Pick a size', item.sizes.map(fmtSize)));
+      // Carry over the Size filter if one is picked.
+      var sizeFilter = filters.filter(function (f) { return f.def.id === 'size'; })[0];
+      if (sizeFilter && sizeFilter.select.value) size.value = sizeFilter.select.value;
+    }
+    var name = field(form, 'Name', input('text', 'name', 'name'));
+    var phone = field(form, 'Phone number', input('tel', 'phone', 'tel'));
+    phone.placeholder = '(555) 555-5555';
+    var orderLoc = field(form, 'Ordering from', choice('order_location', 'Which house?', LOCATIONS));
+    var pickLoc = field(form, 'Pick up at', choice('pickup_location', 'Which house?', LOCATIONS));
+
+    var consent = el('label', 'order-consent');
+    var box = input('checkbox', 'consent');
+    consent.appendChild(box);
+    var text = el('span');
+    text.innerHTML = 'I agree that Perfexxxion Pro Shop can keep my name and phone number to handle this order and call me about it ' +
+      '(<a href="../privacy-policy/" target="_blank" rel="noopener">Privacy Policy</a>), and I accept the ' +
+      '<a href="../terms-of-service/" target="_blank" rel="noopener">Terms</a> and ' +
+      '<a href="../refund-policy/" target="_blank" rel="noopener">Refund Policy</a>.';
+    consent.appendChild(text);
+    form.appendChild(consent);
+
+    form.appendChild(el('p', 'order-note', 'Nothing is charged online. We will call you to confirm the order and let you know when it is ready to pick up.'));
+    var error = el('p', 'order-error');
+    error.setAttribute('role', 'alert');
+    form.appendChild(error);
+    var submit = el('button', 'button order-submit', 'Submit order');
+    submit.type = 'submit';
+    form.appendChild(submit);
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      error.textContent = '';
+      if (normalizePhone(phone.value).replace(/\D/g, '').length !== 10) {
+        error.textContent = 'Please enter a 10-digit phone number so we can call you.';
+        phone.focus();
+        return;
+      }
+      var chosen = size ? parseFloat(size.value) : null;
+      var code = chosen !== null ? item.codes[chosen] : item.code;
+      var order = {
+        customer_name: name.value.trim(),
+        phone: normalizePhone(phone.value),
+        item: item.name + (chosen !== null ? ' - Size ' + fmtSize(chosen) : ''),
+        quantity: 1,
+        order_location: orderLoc.value,
+        pickup_location: pickLoc.value,
+        source: 'website',
+        is_stock: false,
+        submitted_at: new Date().toISOString(),
+        price: Number(item.price),
+        supplier: 'Ace Mitchell',
+        notes: 'Ace Mitchell item ' + code,
+        // Shoes and bags arrive for a named customer but never get drilled,
+        // so keep them off the drilling queue.
+        no_drill_needed: true
+      };
+      submit.disabled = true;
+      submit.textContent = 'Submitting...';
+      saveOrder(order).then(function () {
+        form.remove();
+        var done = el('div', 'order-done');
+        var h = el('h3', null, 'Order received!');
+        h.tabIndex = -1;
+        done.appendChild(h);
+        done.appendChild(el('p', null, order.item + ' has been submitted.'));
+        done.appendChild(el('p', null, 'We will call you at ' + order.phone + ' to confirm.'));
+        var ok = el('button', 'button', 'Close');
+        ok.type = 'button';
+        ok.addEventListener('click', function () { d.close(); });
+        done.appendChild(ok);
+        d.appendChild(done);
+        h.focus();
+      }).catch(function (err) {
+        if (window.console) console.error('Order failed:', err);
+        submit.disabled = false;
+        submit.textContent = 'Submit order';
+        error.textContent = 'Sorry, the order could not be sent and nothing was saved. Please try again, or call the shop at (570) 815-1026.';
+      });
+    });
+
+    d.appendChild(form);
+    if (d.showModal) d.showModal(); else d.setAttribute('open', '');
+    (size || name).focus();
+  }
+
+  function saveOrder(order) {
+    return fetch(SUPABASE_URL + '/rest/v1/orders', {
+      method: 'POST',
+      headers: {
+        apikey: SUPABASE_KEY, Authorization: 'Bearer ' + SUPABASE_KEY,
+        'Content-Type': 'application/json', Prefer: 'return=minimal'
+      },
+      body: JSON.stringify(order)
+    }).then(function (res) {
+      if (res.ok) return;
+      return res.text().then(function (body) {
+        // Older databases may not have the no-drill column yet; the order
+        // matters more than the flag.
+        if ('no_drill_needed' in order && /no_drill_needed/.test(body)) {
+          var copy = {};
+          Object.keys(order).forEach(function (k) { if (k !== 'no_drill_needed') copy[k] = order[k]; });
+          return saveOrder(copy);
+        }
+        throw new Error(body || res.status);
+      });
+    });
   }
 
   if (search) search.addEventListener('input', render);
