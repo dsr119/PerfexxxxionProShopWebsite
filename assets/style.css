@@ -145,10 +145,13 @@ main { min-height: 60vh; }
 /* Shoes and Bags pages (assets/stock.js) */
 .stock-tools { display: flex; flex-wrap: wrap; gap: 12px; margin: 8px 0 12px; }
 .stock-tools label { display: flex; flex-direction: column; gap: 4px; font-weight: 600; font-size: .95rem; }
-.stock-tools input, .stock-tools select { font: inherit; padding: 8px 10px; border: 1px solid #cbd2d9; border-radius: 4px; min-width: 220px; max-width: 100%; }
+.stock-tools input, .stock-tools select { font: inherit; padding: 8px 10px; border: 1px solid #cbd2d9; border-radius: 4px; min-width: 150px; max-width: 100%; background: #fff; }
+.stock-tools #stock-search { min-width: 220px; }
+.stock-clear { align-self: flex-end; font: inherit; font-weight: 600; padding: 8px 12px; border: 1px solid var(--accent); color: var(--accent-dark); background: #fff; border-radius: 4px; cursor: pointer; }
+.stock-clear:hover { background: #f5effa; }
 .stock-status { color: var(--muted); margin: 0 0 16px; }
 .stock-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; }
-@media (max-width: 520px) { .stock-grid { grid-template-columns: 1fr 1fr; gap: 10px; } .stock-body { padding: 10px; } .stock-tools input, .stock-tools select { min-width: 0; width: 100%; } .stock-tools label { flex: 1 1 140px; } }
+@media (max-width: 520px) { .stock-grid { grid-template-columns: 1fr 1fr; gap: 10px; } .stock-body { padding: 10px; } .stock-tools input, .stock-tools select, .stock-tools #stock-search { min-width: 0; width: 100%; } .stock-tools label { flex: 1 1 140px; } .stock-clear { flex: 1 1 100%; } }
 .stock-card { display: flex; flex-direction: column; border: 1px solid #e4e7eb; border-radius: 6px; overflow: hidden; background: #fff; }
 .stock-pic { aspect-ratio: 1 / 1; background: #fff; display: flex; align-items: center; justify-content: center; border-bottom: 1px solid #e4e7eb; }
 .stock-pic img { width: 100%; height: 100%; object-fit: contain; padding: 8px; }
