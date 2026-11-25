@@ -150,6 +150,9 @@ main { min-height: 60vh; }
 .stock-clear { align-self: flex-end; font: inherit; font-weight: 600; padding: 8px 12px; border: 1px solid var(--accent); color: var(--accent-dark); background: #fff; border-radius: 4px; cursor: pointer; }
 .stock-clear:hover { background: #f5effa; }
 .stock-status { color: var(--muted); margin: 0 0 16px; }
+.stock-status:empty { display: none; }
+.stock-more { display: block; margin: 20px auto 0; border: 0; font: inherit; font-weight: 600; cursor: pointer; }
+.stock-more[hidden] { display: none; }
 .stock-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; }
 @media (max-width: 520px) { .stock-grid { grid-template-columns: 1fr 1fr; gap: 10px; } .stock-body { padding: 10px; } .stock-tools input, .stock-tools select, .stock-tools #stock-search { min-width: 0; width: 100%; } .stock-tools label { flex: 1 1 140px; } .stock-clear { flex: 1 1 100%; } }
 .stock-card { display: flex; flex-direction: column; border: 1px solid #e4e7eb; border-radius: 6px; overflow: hidden; background: #fff; }
