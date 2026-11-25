@@ -25,6 +25,12 @@
   // dropped off Ace Mitchell's site, so its stock is no longer being checked.
   var FRESH_DAYS = 3;
   var PAGE = 1000;
+  // Cards are drawn this many at a time; more come in as you scroll down.
+  var BATCH = 30;
+  // Pictures are shown at most ~300px wide, so ask bowling.com's picture
+  // server for one this wide (enough for sharp phone screens) instead of
+  // the full-size file.
+  var IMAGE_WIDTH = 400;
 
   var root = document.getElementById('stock');
   if (!root) return;
@@ -306,14 +312,27 @@
     return e;
   }
 
+  // bowling.com's picture server resizes on request (?width=).
+  function smallImage(url) {
+    if (!/^https?:\/\/cdn-images\.bowling\.com\//i.test(url || '')) return url;
+    try {
+      var u = new URL(url);
+      u.searchParams.set('width', String(IMAGE_WIDTH));
+      return u.toString();
+    } catch (e) { return url; }
+  }
+
   function card(item) {
     var c = el('article', 'stock-card');
     var pic = el('div', 'stock-pic');
     if (item.image) {
       var img = el('img');
-      img.src = item.image;
+      img.src = smallImage(item.image);
       img.alt = item.name;
       img.loading = 'lazy';
+      img.decoding = 'async';
+      img.width = IMAGE_WIDTH;
+      img.height = IMAGE_WIDTH;
       img.onerror = function () { pic.classList.add('no-pic'); img.remove(); };
       pic.appendChild(img);
     } else {
@@ -351,11 +370,39 @@
     var sort = SORTS.filter(function (s) { return sortSelect && s[0] === sortSelect.value; })[0] || SORTS[0];
     shown.sort(sort[2]);
     grid.textContent = '';
-    shown.forEach(function (i) { grid.appendChild(card(i)); });
+    pending = shown;
+    drawn = 0;
+    drawMore();
     status.textContent = items.length
-      ? (shown.length ? shown.length + ' of ' + items.length + ' ' + category.toLowerCase() + ' in stock'
+      ? (shown.length ? ''
         : 'Nothing in stock matches those filters. Try fewer, or call the shop at (570) 815-1026 and we can order it for you.')
       : 'Nothing in stock right now. Call the shop at (570) 815-1026 and we can order it for you.';
+  }
+
+  // ---- showing 30 at a time --------------------------------------------
+
+  var pending = [];
+  var drawn = 0;
+  var more = el('button', 'button stock-more', 'Show more');
+  more.type = 'button';
+  more.hidden = true;
+  more.addEventListener('click', drawMore);
+  grid.parentNode.insertBefore(more, grid.nextSibling);
+
+  function drawMore() {
+    var end = Math.min(drawn + BATCH, pending.length);
+    var frag = document.createDocumentFragment();
+    for (; drawn < end; drawn++) frag.appendChild(card(pending[drawn]));
+    grid.appendChild(frag);
+    more.hidden = drawn >= pending.length;
+  }
+
+  // Load the next 30 on their own as the button scrolls into view; the
+  // button stays for browsers without IntersectionObserver.
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(function (entries) {
+      if (entries[0].isIntersecting && !more.hidden) drawMore();
+    }, { rootMargin: '600px 0px' }).observe(more);
   }
 
   // ---- ordering -------------------------------------------------------
@@ -422,7 +469,7 @@
     var head = el('div', 'order-item');
     if (item.image) {
       var img = el('img');
-      img.src = item.image;
+      img.src = smallImage(item.image);
       img.alt = '';
       head.appendChild(img);
     }
